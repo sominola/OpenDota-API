@@ -9,8 +9,14 @@ namespace OpenDotaApi.Api.Player
     using Model.Matches;
     using Model.Heroes;
     using Model.Peers;
-    using Model.Pros;
+    using Model.Pro;
     using Model.Totals;
+    using Model.Histograms;
+    using Model.WardMap;
+    using Model.WordCloud;
+    using Model.Ratings;
+    using Model.Rankings;
+
     public interface IPlayerEndpoint
     {
         Task<Player> GetPlayerAsync(long playerId);
@@ -25,10 +31,20 @@ namespace OpenDotaApi.Api.Player
 
         Task<List<Peers>> GetPeersAsync(long playerId, PlayerParameters parameters = null);
 
-        Task<List<Pros>> GetProsAsync(long playerId, PlayerParameters parameters = null);
+        Task<List<Pro>> GetProAsync(long playerId, PlayerParameters parameters = null);
 
         Task<List<Totals>> GetTotalsAsync(long playerId, PlayerParameters parameters = null);
-        
-        
+
+        Task<List<Histograms>> GetHistogramsAsync(long playerId, string field, PlayerParameters parameters = null);
+
+        Task<List<WardMap>> GetWardMapAsync(long playerId, PlayerParameters parameters = null);
+
+        Task<List<WordCloud>> GetWordCloudAsync(long playerId, PlayerParameters parameters = null);
+
+        Task<List<Ratings>> GetRatingsAsync(long playerId);
+
+        Task<List<Rankings>> GetRankingsAsync(long playerId);
+
+        Task<bool> RefreshPlayerMatchHistory(long playerId);
     }
 }

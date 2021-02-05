@@ -48,6 +48,11 @@ namespace OpenDotaApi
             return await _client.GetFromJsonAsync<T>(url);
         }
 
+        public async Task<HttpResponseMessage> PostRequestAsync(string url,HttpContent content = null)
+        {
+            content = new StringContent("");
+            return await _client.PostAsync(url,content);
+        }
 
         public void Dispose()
         {

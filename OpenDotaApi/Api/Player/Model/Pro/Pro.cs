@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace OpenDotaApi.Api.Player.Model.Pros
+namespace OpenDotaApi.Api.Player.Model.Pro
 {
-    public class Pros
+    public class Pro
     {
         [JsonPropertyName("account_id")]
         public long? AccountId { get; set; }
