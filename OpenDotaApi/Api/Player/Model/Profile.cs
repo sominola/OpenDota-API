@@ -1,48 +1,48 @@
 using System;
 using System.ComponentModel;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model
 {
     public class Profile
     {
-        [JsonProperty("account_id")]
+        [JsonPropertyName("account_id")]
         public long AccountId { get; set; }
 
-        [JsonProperty("personaname")]
-        public string Personaname { get; set; }
+        [JsonPropertyName("personaname")]
+        public string PersonaName { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("plus")]
+        [JsonPropertyName("plus")]
         public bool? Plus { get; set; }
 
-        [JsonProperty("cheese")]
-        public long Cheese { get; set; }
+        [JsonPropertyName("cheese")]
+        public int? Cheese { get; set; }
 
-        [JsonProperty("steamid")]
-        public string Steamid { get; set; }
+        [JsonPropertyName("steamid")]
+        public long? SteamId { get; set; }
 
-        [JsonProperty("avatar")]
-        public string Avatar { get; set; }
+        [JsonPropertyName("avatar")]
+        public Uri Avatar { get; set; }
 
-        [JsonProperty("avatarmedium")]
-        public Uri Avatarmedium { get; set; }
+        [JsonPropertyName("avatarmedium")]
+        public Uri AvatarMedium { get; set; }
 
-        [JsonProperty("avatarfull")]
+        [JsonPropertyName("avatarfull")]
         public Uri Avatarfull { get; set; }
 
-        [JsonProperty("profileurl")]
-        public Uri Profileurl { get; set; }
+        [JsonPropertyName("profileurl")]
+        public Uri ProfileUrl { get; set; }
 
-        [JsonProperty("last_login")]
+        [JsonPropertyName("last_login")]
         public DateTimeOffset? LastLogin { get; set; }
 
-        [JsonProperty("loccountrycode")]
-        public string Loccountrycode { get; set; }
+        [JsonPropertyName("loccountrycode")]
+        public string LocCountryCode { get; set; }
 
-        [JsonProperty("is_contributor")]
+        [JsonPropertyName("is_contributor")]
         public bool IsContributor { get; set; }
     }
 }

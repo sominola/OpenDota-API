@@ -1,14 +1,15 @@
 namespace OpenDotaApi
 {
     using Api.Player;
+
     public class OpenDota
     {
-
         public OpenDota()
         {
             var request = new RequestHandler();
-            Player = new PlayerService(request);
+            Player = new PlayerEndpoint(request);
         }
-        public readonly IPlayerService Player;
+
+        public readonly IPlayerEndpoint Player;
     }
 }

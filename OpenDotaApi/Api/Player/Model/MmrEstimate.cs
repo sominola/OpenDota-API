@@ -1,9 +1,10 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model
 {
     public class MmrEstimate
     {
-        [JsonProperty("estimate")] public int? Estimate { get; set; }
+        [JsonPropertyName("estimate")]
+        public int? Estimate { get; set; }
     }
 }

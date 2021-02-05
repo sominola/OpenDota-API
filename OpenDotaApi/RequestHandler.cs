@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Timer = System.Timers.Timer;
 
 namespace OpenDotaApi
@@ -45,9 +45,7 @@ namespace OpenDotaApi
 
         public async Task<T> GetResponseAsync<T>(string url) where T: class
         {
-            var response = await _client.GetStringAsync(url);
-            return JsonConvert.DeserializeObject<T>(response);
-
+            return await _client.GetFromJsonAsync<T>(url);
         }
 
 
