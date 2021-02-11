@@ -5,7 +5,7 @@ This is a C# wrapper for the OpenDota api.
 ## Usage 
 Import the namespace
 ````csharp
-using Dota2Api
+using OpenDotaApi;
 ````
 
 Then use the class! 
