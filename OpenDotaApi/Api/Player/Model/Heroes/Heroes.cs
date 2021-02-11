@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model.Heroes
 {
-
     public class Heroes
     {
         [JsonPropertyName("hero_id")]

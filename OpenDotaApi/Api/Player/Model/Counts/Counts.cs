@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model.Counts
 {
-    public record Counts
+    public class Counts
     {
         [JsonPropertyName("leaver_status")]
         public Dictionary<string, GameMode> LeaverStatus { get; set; }
@@ -26,6 +26,4 @@ namespace OpenDotaApi.Api.Player.Model.Counts
         [JsonPropertyName("is_radiant")]
         public Dictionary<string, GameMode> IsRadiant { get; set; }
     }
-
-   
 }

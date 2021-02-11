@@ -1,9 +1,10 @@
 namespace OpenDotaApi.Api.Player.Model.RecentMatches
 {
     using System.Text.Json.Serialization;
+
     public class RecentMatches
     {
-       [JsonPropertyName("match_id")]
+        [JsonPropertyName("match_id")]
         public long? MatchId { get; set; }
 
         [JsonPropertyName("player_slot")]

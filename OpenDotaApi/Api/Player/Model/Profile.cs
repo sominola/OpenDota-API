@@ -22,7 +22,7 @@ namespace OpenDotaApi.Api.Player.Model
         public int? Cheese { get; set; }
 
         [JsonPropertyName("steamid")]
-        public long? SteamId { get; set; }
+        public string SteamId { get; set; }
 
         [JsonPropertyName("avatar")]
         public Uri Avatar { get; set; }

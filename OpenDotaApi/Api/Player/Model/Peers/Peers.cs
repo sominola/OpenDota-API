@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model.Peers
 {
-
     public class Peers
     {
         [JsonPropertyName("account_id")]

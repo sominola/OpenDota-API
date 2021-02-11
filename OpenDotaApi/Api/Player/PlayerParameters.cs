@@ -6,25 +6,25 @@ namespace OpenDotaApi.Api.Player
 {
     public class PlayerParameters
     {
-        public int? Limit { get; init; }
-        public int? Offset { get; init; }
-        public bool? Win { get; init; }
-        public int? Patch { get; init; }
-        public int? GameMode { get; init; }
-        public int? LobbyType { get; init; }
-        public int? Region { get; init; }
-        public int? Date { get; init; }
-        public int? LaneRole { get; init; }
-        public int? HeroId { get; init; }
-        public bool? IsRadiant { get; init; }
-        public IEnumerable IncludedAccountId { get; init; }
-        public IEnumerable ExcludedAccountId { get; init; }
-        public IEnumerable WithHeroId { get; init; }
-        public IEnumerable AgainstHeroId { get; init; }
-        public int? Significant { get; init; }
-        public int? Having { get; init; }
-        public int? Sort { get; init; }
-        public string Project { get; init; }
+        public int? Limit { get; set; }
+        public int? Offset { get; set; }
+        public bool? Win { get; set; }
+        public int? Patch { get; set; }
+        public int? GameMode { get; set; }
+        public int? LobbyType { get; set; }
+        public int? Region { get; set; }
+        public int? Date { get; set; }
+        public int? LaneRole { get; set; }
+        public int? HeroId { get; set; }
+        public bool? IsRadiant { get; set; }
+        public IEnumerable IncludedAccountId { get; set; }
+        public IEnumerable ExcludedAccountId { get; set; }
+        public IEnumerable WithHeroId { get; set; }
+        public IEnumerable AgainstHeroId { get; set; }
+        public int? Significant { get; set; }
+        public int? Having { get; set; }
+        public int? Sort { get; set; }
+        public string Project { get; set; }
 
         public string GetParameters()
         {
@@ -38,7 +38,7 @@ namespace OpenDotaApi.Api.Player
                 if (field.PropertyType == typeof(IEnumerable))
                 {
                     var list = GetType().GetProperty(field.Name)?.GetValue(this, null);
-                    foreach (var val in (IEnumerable) list)
+                    foreach (var val in list as IEnumerable)
                     {
                         parameters += $"&{field.Name}={Convert.ToInt64(val)}";
                     }
@@ -47,7 +47,7 @@ namespace OpenDotaApi.Api.Player
                     parameters += $"&{field.Name}={Convert.ToInt64(value)}";
             }
 
-            return "?" + Regex.Replace(parameters, "([a-z])([A-Z])", "$1_$2").ToLower();
+            return Regex.Replace(parameters, "([a-z])([A-Z])", "$1_$2").ToLower();
         }
     }
 }

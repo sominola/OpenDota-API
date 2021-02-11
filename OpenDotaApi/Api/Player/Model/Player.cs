@@ -13,7 +13,7 @@ namespace OpenDotaApi.Api.Player.Model
         [JsonPropertyName("competitive_rank")]
         public int? CompetitiveRank { get; set; }
 
-        [JsonPropertyName("rank_tier")] 
+        [JsonPropertyName("rank_tier")]
         public int? RankTier { get; set; }
 
         [JsonPropertyName("leaderboard_rank")]
