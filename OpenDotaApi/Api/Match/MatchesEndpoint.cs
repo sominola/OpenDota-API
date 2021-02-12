@@ -11,7 +11,7 @@ namespace OpenDotaApi.Api.Match
         
         public MatchesEndpoint(RequestHandler requestHandler)
         {
-           this._request = requestHandler;
+           _request = requestHandler;
         }
         public async Task<Match> GetMatchAsync(long matchId) =>
            await _request.GetResponseAsync<Match>($"matches/{matchId}");
