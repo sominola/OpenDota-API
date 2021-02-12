@@ -8,7 +8,6 @@ namespace OpenDotaApi.Api.Player
     using Model.WinLoss;
     using Model.RecentMatches;
     using Model.Matches;
-    using Model.Heroes;
     using Model.Peers;
     using Model.Pro;
     using Model.Totals;
@@ -24,7 +23,7 @@ namespace OpenDotaApi.Api.Player
 
         public PlayerEndpoint(RequestHandler requestHandler)
         {
-            this._request = requestHandler;
+            _request = requestHandler;
         }
 
         public async Task<Player> GetPlayerAsync(long playerId) =>

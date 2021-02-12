@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model

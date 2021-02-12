@@ -7,7 +7,6 @@ namespace OpenDotaApi.Api.Player
     using Model.WinLoss;
     using Model.RecentMatches;
     using Model.Matches;
-    using Model.Heroes;
     using Model.Peers;
     using Model.Pro;
     using Model.Totals;
