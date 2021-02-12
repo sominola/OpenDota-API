@@ -11,7 +11,7 @@ namespace OpenDotaApi.Api.PlayersByRank
 
         public PlayersByRankEndpoint(RequestHandler requestHandler)
         {
-            this._request = requestHandler;
+            _request = requestHandler;
         }
         public async Task<List<PlayersByRank>> GetListPlayersByRankAsync() =>
             await _request.GetResponseAsync<List<PlayersByRank>>($"playersByRank");
