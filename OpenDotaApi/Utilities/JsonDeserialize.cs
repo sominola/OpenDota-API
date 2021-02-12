@@ -3,16 +3,15 @@ using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Utilities
 {
-    public static class JsonDeserialize<T> where T: class
+    public  class JsonDeserialize : IJsonDeserialize 
     {
-        private static readonly JsonSerializerOptions _options;
-        static JsonDeserialize()
+        private  readonly JsonSerializerOptions _options; 
+        public JsonDeserialize()
         {
             _options = new JsonSerializerOptions();
             _options.Converters.Add(new Int32Converter());
         }
-
-        public static T Deserialize(string json)
+        public T Deserialize<T>(string json)
         {
             return JsonSerializer.Deserialize<T>(json,_options);
         }

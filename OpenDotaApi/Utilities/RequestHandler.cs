@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Timer = System.Timers.Timer;
 
 namespace OpenDotaApi.Utilities
 {
-    using JsonConverters;
     public class RequestHandler : IDisposable
     {
         private readonly HttpClient _client;
         private readonly HttpClientHandler _clientHandler;
         private bool _disposed;
-
+        private IJsonDeserialize _json;
         private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
         private readonly Timer _timer = new Timer {Interval = 61000};
 
@@ -24,18 +22,19 @@ namespace OpenDotaApi.Utilities
 
         public RequestHandler(string apiKey = null, IWebProxy proxy = null)
         {
+            _json = new JsonDeserialize();
             _maxRequests = apiKey != null ? 1000 : 60;
 
-            _timer.Elapsed += (_, _) =>
+            _timer.Elapsed += (o,e) =>
             {
                 _countRequests = 0;
                 _resetEvent.Set();
             };
 
-            this._clientHandler = new HttpClientHandler {UseProxy = proxy != null, Proxy = proxy};
-            this._client = new HttpClient(_clientHandler)
+            _clientHandler = new HttpClientHandler {UseProxy = proxy != null, Proxy = proxy};
+            _client = new HttpClient(_clientHandler)
             {
-                BaseAddress = new Uri("https://api.opendota.com/api/"),
+                BaseAddress = new Uri("https://api.opendota.com/api/")
             };
         }
 
@@ -53,7 +52,7 @@ namespace OpenDotaApi.Utilities
             var response = await _client.GetAsync(url + "");
             var textResponse = await response.Content.ReadAsStringAsync();
             
-            return string.IsNullOrEmpty(textResponse) ? null : JsonDeserialize<T>.Deserialize(textResponse);
+            return string.IsNullOrEmpty(textResponse) ? null : _json.Deserialize<T>(textResponse);
         }
 
         public async Task<HttpResponseMessage> PostRequestAsync(string url, HttpContent content = null)
