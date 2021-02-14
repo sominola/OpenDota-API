@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.ProMatch.Model
@@ -11,7 +12,7 @@ namespace OpenDotaApi.Api.ProMatch.Model
         public int? Duration { get; set; }
 
         [JsonPropertyName("start_time")]
-        public long? StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [JsonPropertyName("radiant_team_id")]
         public long? RadiantTeamId { get; set; }

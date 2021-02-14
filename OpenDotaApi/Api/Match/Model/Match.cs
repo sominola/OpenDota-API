@@ -88,7 +88,7 @@ namespace OpenDotaApi.Api.Match.Model
         public int? Skill { get; set; }
 
         [JsonPropertyName("start_time")]
-        public long? StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [JsonPropertyName("teamfights")]
         public List<Teamfight> Teamfights { get; set; }

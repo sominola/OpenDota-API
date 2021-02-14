@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Api.Player.Model.Matches
@@ -26,7 +27,7 @@ namespace OpenDotaApi.Api.Player.Model.Matches
         public int? HeroId { get; set; }
 
         [JsonPropertyName("start_time")]
-        public long? StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [JsonPropertyName("version")]
         public int? Version { get; set; }
@@ -49,4 +50,6 @@ namespace OpenDotaApi.Api.Player.Model.Matches
         [JsonPropertyName("heroes")]
         public Heroes Heroes { get; set; }
     }
+
+   
 }

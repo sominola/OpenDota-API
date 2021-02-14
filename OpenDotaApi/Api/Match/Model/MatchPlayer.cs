@@ -268,7 +268,7 @@ namespace OpenDotaApi.Api.Match.Model
         public bool? RadiantWin { get; set; }
 
         [JsonPropertyName("start_time")]
-        public long? StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [JsonPropertyName("duration")]
         public int? Duration { get; set; }
