@@ -38,7 +38,7 @@ namespace OpenDotaApi.Utilities
             };
         }
 
-        public async Task<T> GetResponseAsync<T>(string url) where T : class
+        public async Task<string> GetStringAsync(string url)
         {
             _timer.Enabled = true;
             if (_countRequests == _maxRequests)
@@ -48,8 +48,27 @@ namespace OpenDotaApi.Utilities
             }
 
             _countRequests++;
-   
-            var response = await _client.GetAsync(url + "");
+            var response = await _client.GetAsync(url);
+            var textResponse = await response.Content.ReadAsStringAsync();
+
+            return string.IsNullOrEmpty(textResponse) ? null : textResponse;
+        }
+
+        public async Task<T> GetResponseAsync<T>(string url,string parameters = null) where T : class
+        {
+            _timer.Enabled = true;
+            if (_countRequests == _maxRequests)
+            {
+                _resetEvent.WaitOne();
+                _resetEvent.Reset();
+            }
+
+            _countRequests++;
+            
+            var param = parameters == null ? "?" : $"?{parameters}";
+            param += ApiKey == null ? "" : $"&api_key={ApiKey}";
+            
+            var response = await _client.GetAsync(url+param);
             var textResponse = await response.Content.ReadAsStringAsync();
             
             return string.IsNullOrEmpty(textResponse) ? null : _json.Deserialize<T>(textResponse);
