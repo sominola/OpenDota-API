@@ -3,10 +3,30 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>9</LangVersion>
+        <Authors>sominola</Authors>
+        <Version>1.1.6</Version>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>A .Net wrapper for the OpenDota API.
+The OpenDota API provides Dota 2 related data including advanced match data extracted from match replays.</Description>
+        <Copyright>sominola</Copyright>
+        <PackageProjectUrl>https://github.com/sominola/OpenDota-API</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/sominola/OpenDota-API</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageTags>dota, dota2, api, apiwrapper, api wrapper, opendota, opendota api, steam, opendota.com</PackageTags>
+        <PackageIcon>1.png</PackageIcon>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="System.Text.Json" Version="5.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="1.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
