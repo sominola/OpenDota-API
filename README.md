@@ -24,7 +24,7 @@ using OpenDotaApi;
 ## Getting Started
 Then use the class! 
 ````csharp
- int SteamId = 0;
+ long SteamId = 0;
  var openDota = new OpenDota();
  var data = await openDota.Player.GetPlayerAsync(SteamId);
  Console.WriteLine(data.Profile.Avatarfull);
