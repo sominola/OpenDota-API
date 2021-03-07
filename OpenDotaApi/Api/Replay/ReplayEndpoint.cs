@@ -17,7 +17,7 @@ namespace OpenDotaApi.Api.Replay
 
         public async Task<List<Replay>> GetReplayDataAsync(List<long> matchIds)
         {
-            string parameters = "";
+            var parameters = "";
             if (matchIds != null)
                 foreach (var value in matchIds)
                     parameters += $"&match_id={value}";

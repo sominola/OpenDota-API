@@ -12,9 +12,9 @@ namespace OpenDotaApi.Utilities
         private readonly HttpClient _client;
         private readonly HttpClientHandler _clientHandler;
         private bool _disposed;
-        private IJsonDeserialize _json;
-        private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
-        private readonly Timer _timer = new Timer {Interval = 61000};
+        private readonly IJsonDeserialize _json;
+        private readonly ManualResetEvent _resetEvent = new(false);
+        private readonly Timer _timer = new() {Interval = 61000};
 
         private int _countRequests;
         private readonly int _maxRequests;
@@ -25,7 +25,7 @@ namespace OpenDotaApi.Utilities
             _json = new JsonDeserialize();
             _maxRequests = apiKey != null ? 1000 : 60;
 
-            _timer.Elapsed += (o,e) =>
+            _timer.Elapsed += (_,_) =>
             {
                 _countRequests = 0;
                 _resetEvent.Set();

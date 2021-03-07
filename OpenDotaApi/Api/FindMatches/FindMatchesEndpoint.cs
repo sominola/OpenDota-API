@@ -17,7 +17,7 @@ namespace OpenDotaApi.Api.FindMatches
 
         public async Task<List<FindMatches>> FindsRecentMatchesByHeroesPlayedAsync(List<int> teamA = null, List<int> teamB = null)
         {
-            string parameters = "";
+            var parameters = "";
             if (teamA != null)
                 foreach (var val in teamA)
                     parameters += $"&teamA={val}";

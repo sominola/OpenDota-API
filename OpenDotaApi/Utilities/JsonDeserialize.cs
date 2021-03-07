@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Utilities

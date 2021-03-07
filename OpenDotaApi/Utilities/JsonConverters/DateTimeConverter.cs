@@ -23,13 +23,11 @@ namespace OpenDotaApi.Utilities.JsonConverters
               
             }
             return new DateTime(Epoch.Ticks + reader.GetInt64() * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
-            // return DateTime.UnixEpoch.AddSeconds(reader.GetInt64());
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
             writer.WriteStringValue((value - Epoch).TotalMilliseconds + "000");
-            // writer.WriteStringValue((value - DateTime.UnixEpoch).TotalMilliseconds + "000");
         }
     }
 }
