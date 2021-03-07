@@ -1,4 +1,4 @@
-namespace OpenDotaApi.Api.Constants
+﻿namespace OpenDotaApi.Enums
 {
     public enum EnumConstants
     {
@@ -27,6 +27,6 @@ namespace OpenDotaApi.Api.Constants
         PlayerColors,
         Region,
         Skillshots,
-        XpLevel,
+        XpLevel
     }
 }

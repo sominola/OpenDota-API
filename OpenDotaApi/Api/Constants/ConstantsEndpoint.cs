@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
+using OpenDotaApi.Enums;
 
 namespace OpenDotaApi.Api.Constants
 {

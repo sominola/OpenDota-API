@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using OpenDotaApi.Enums;
 
 namespace OpenDotaApi.Api.Constants
 {
