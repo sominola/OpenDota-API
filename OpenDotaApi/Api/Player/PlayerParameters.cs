@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace OpenDotaApi.Api.Player
+namespace OpenDotaApi
 {
     public class PlayerParameters
     {
