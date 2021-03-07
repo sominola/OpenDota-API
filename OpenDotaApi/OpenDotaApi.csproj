@@ -12,10 +12,11 @@ The OpenDota API provides Dota 2 related data including advanced match data extr
         <PackageProjectUrl>https://github.com/sominola/OpenDota-API</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sominola/OpenDota-API</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>Added query parameters, minor fixes</PackageReleaseNotes>
         <PackageTags>dota, dota2, api, apiwrapper, api wrapper, opendota, opendota api, steam, opendota.com</PackageTags>
-        <PackageIcon>1.png</PackageIcon>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageIconUrl>https://camo.githubusercontent.com/d5c917b7536cf5fd164bfefc59fdffe1d67c6d6b659475c58709292423a0db72/68747470733a2f2f7777772e6f70656e646f74612e636f6d2f6173736574732f696d616765732f69636f6e732f69636f6e2d313434783134342e706e67</PackageIconUrl>
+        <PackageVersion>1.2.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
