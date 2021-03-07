@@ -21,7 +21,7 @@ namespace OpenDotaApi.Utilities.JsonConverters
                     break;
                 }
                 case JsonTokenType.Number:
-                    return reader.GetInt32();
+                    return reader.GetInt64();
             }
 
             throw new JsonException();
