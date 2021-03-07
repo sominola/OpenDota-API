@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OpenDotaApi.Enums;
 
 namespace OpenDotaApi.Api.Records
 {

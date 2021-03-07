@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace OpenDotaApi.Api.Scenarios.Model
+namespace OpenDotaApi.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum HeroLaneRole

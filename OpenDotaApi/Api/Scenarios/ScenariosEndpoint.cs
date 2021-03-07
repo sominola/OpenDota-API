@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OpenDotaApi.Enums;
 using OpenDotaApi.Utilities;
 
 namespace OpenDotaApi.Api.Scenarios
@@ -30,21 +31,21 @@ namespace OpenDotaApi.Api.Scenarios
             return await _request.GetResponseAsync<List<LaneRoles>>("scenarios/laneRoles", parameters);
         }
 
-        public async Task<List<TeamScenarios>> GetTeamScenarios(Scenarios? scenario = null)
+        public async Task<List<TeamScenarios>> GetTeamScenarios(Enums.Scenarios? scenario = null)
         {
             var parameters = "";
             switch (scenario)
             {
-                case Scenarios.CourierKill:
+                case Enums.Scenarios.CourierKill:
                     parameters = "courier_kill";
                     break;
-                case Scenarios.FirstBlood:
+                case Enums.Scenarios.FirstBlood:
                     parameters = "first_blood";
                     break;
-                case Scenarios.NegChat1Min:
+                case Enums.Scenarios.NegChat1Min:
                     parameters = "neg_chat_1min";
                     break;
-                case Scenarios.PosChat1Min:
+                case Enums.Scenarios.PosChat1Min:
                     parameters = "pos_chat_1min";
                     break;
                 case null:

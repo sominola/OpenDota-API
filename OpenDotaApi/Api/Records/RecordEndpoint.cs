@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
-
+using OpenDotaApi.Enums;
 namespace OpenDotaApi.Api.Records
 {
     using Model;

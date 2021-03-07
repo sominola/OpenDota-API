@@ -14,5 +14,5 @@ namespace OpenDotaApi.Enums
         Nuker,
         Pusher,
         Support
-    };
+    }
 }

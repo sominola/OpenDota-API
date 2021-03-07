@@ -9,5 +9,5 @@ namespace OpenDotaApi.Enums
         Excluded,
         Premium,
         Professional
-    };
+    }
 }

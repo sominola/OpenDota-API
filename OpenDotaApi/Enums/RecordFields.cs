@@ -1,16 +1,17 @@
-namespace OpenDotaApi.Api.Records.Model
+﻿namespace OpenDotaApi.Enums
 {
     public enum RecordField
     {
         Duration,
         Kills,
+        Deaths,
         Assists,
         GoldPerMin,
-        LastHits,
         XpPerMin,
+        LastHits,
         Denies,
         HeroDamage,
         TowerDamage,
-        HeroHealing,
+        HeroHealing
     }
 }

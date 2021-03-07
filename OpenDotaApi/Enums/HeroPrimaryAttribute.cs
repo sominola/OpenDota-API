@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace OpenDotaApi.Enums
@@ -10,5 +8,5 @@ namespace OpenDotaApi.Enums
         Agi,
         Int,
         Str
-    };
+    }
 }

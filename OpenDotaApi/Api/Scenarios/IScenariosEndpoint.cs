@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using OpenDotaApi.Enums;
 namespace OpenDotaApi.Api.Scenarios
 {
     using Model;
@@ -9,6 +9,6 @@ namespace OpenDotaApi.Api.Scenarios
     {
         Task<List<ItemTiming>> GetWinRateForCertainItemTimingsOnHeroesAsync(string item = null, int? heroId = null);
         Task<List<LaneRoles>> GetWinRateForHeroes(HeroLaneRole? role = null, int? heroId = null);
-        Task<List<TeamScenarios>> GetTeamScenarios(Scenarios? scenario = null);
+        Task<List<TeamScenarios>> GetTeamScenarios(Enums.Scenarios? scenario = null);
     }
 }
