@@ -14,7 +14,16 @@ namespace OpenDotaApi.Api.PublicMatch
             _request = request;
         }
 
-        public async Task<List<PublicMatch>> GetListPublicMatchesAsync() =>
-            await _request.GetResponseAsync<List<PublicMatch>>("publicMatches");
+        public async Task<List<PublicMatch>> GetListPublicMatchesAsync(int? mmrAscending = null, int? mmrDescending = null, long? lessThanMatchId = null)
+        {
+            var param = "";
+            if (mmrAscending != null)
+                param += $"&mmr_ascending={mmrAscending}";
+            if (mmrDescending !=null)
+                param += $"&mmr_descending={mmrDescending}";
+            if (lessThanMatchId != null)
+                param += $"less_than_match_id={lessThanMatchId}";
+            return await _request.GetResponseAsync<List<PublicMatch>>("publicMatches",param);
+        }
     }
 }
