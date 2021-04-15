@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace OpenDotaApi
 {
     using Utilities;
@@ -29,9 +31,9 @@ namespace OpenDotaApi
     using Api.Constants;
     public class OpenDota
     {
-        public OpenDota()
+        public OpenDota(string apiKey = null, IWebProxy proxy = null)
         {
-            var request = new RequestHandler();
+            var request = new RequestHandler(apiKey,proxy);
             Matches = new MatchesEndpoint(request);
             PlayersByRank = new PlayersByRankEndpoint(request);
             Player = new PlayerEndpoint(request);
