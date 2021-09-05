@@ -1,84 +1,112 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Timer = System.Timers.Timer;
 
 namespace OpenDotaApi.Utilities
 {
     public class RequestHandler : IDisposable
     {
-        private readonly HttpClient _client;
-        private readonly HttpClientHandler _clientHandler;
         private bool _disposed;
-        private readonly IJsonDeserialize _json;
-        private readonly ManualResetEvent _resetEvent = new(false);
-        private readonly Timer _timer = new() {Interval = 61000};
 
-        private int _countRequests;
-        private readonly int _maxRequests;
+        private readonly HttpClientHandler _handler;
+        private readonly HttpClient _client;
+
+        public DateTime LastDateRequest { get; private set; }
+        public int? CurrentLimitMonth { get; private set; }
+        public int? CurrentLimitMinute { get; private set; }
         public string ApiKey { get; set; }
 
         public RequestHandler(string apiKey = null, IWebProxy proxy = null)
         {
-            _json = new JsonDeserialize();
-            _maxRequests = apiKey != null ? 1000 : 60;
+            ApiKey = apiKey;
+            _handler = new HttpClientHandler {UseProxy = proxy != null, Proxy = proxy};
 
-            _timer.Elapsed += (_,_) =>
-            {
-                _countRequests = 0;
-                _resetEvent.Set();
-            };
-
-            _clientHandler = new HttpClientHandler {UseProxy = proxy != null, Proxy = proxy};
-            _client = new HttpClient(_clientHandler)
+            _client = new HttpClient(_handler)
             {
                 BaseAddress = new Uri("https://api.opendota.com/api/")
             };
         }
 
-        public async Task<string> GetStringAsync(string url)
+        public async Task<HttpResponseMessage> GetResponseAsync(string url, string parameters = null)
         {
-            _timer.Enabled = true;
-            if (_countRequests == _maxRequests)
+            if (string.IsNullOrEmpty(url))
             {
-                _resetEvent.WaitOne();
-                _resetEvent.Reset();
+                throw new ArgumentNullException(nameof(url));
             }
 
-            _countRequests++;
-            var response = await _client.GetAsync(url);
-            var textResponse = await response.Content.ReadAsStringAsync();
 
-            return string.IsNullOrEmpty(textResponse) ? null : textResponse;
-        }
-
-        public async Task<T> GetResponseAsync<T>(string url,string parameters = null) where T : class
-        {
-            _timer.Enabled = true;
-            if (_countRequests == _maxRequests)
+            if (ApiKey != null)
             {
-                _resetEvent.WaitOne();
-                _resetEvent.Reset();
+                parameters += $"&api_key={ApiKey}";
             }
 
-            _countRequests++;
-            
-            var param = parameters == null ? "?" : $"?{parameters}";
-            param += ApiKey == null ? "" : $"&api_key={ApiKey}";
-            
-            var response = await _client.GetAsync(url+param);
-            var textResponse = await response.Content.ReadAsStringAsync();
-            
-            return string.IsNullOrEmpty(textResponse) ? null : _json.Deserialize<T>(textResponse);
+
+            url += "?" + parameters;
+
+            HttpResponseMessage response;
+
+            if (CurrentLimitMinute == null)
+            {
+                response = await _client.GetAsync(url);
+                GetCurrentLimit(response.Headers);
+
+                if (CurrentLimitMinute == null)
+                {
+                    throw new NullReferenceException();
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return response;
+                }
+            }
+
+            switch (CurrentLimitMinute)
+            {
+                case > 0:
+                {
+                    response = await _client.GetAsync(url);
+                    GetCurrentLimit(response.Headers);
+                    return response;
+                }
+                default:
+                    var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
+
+                    await Task.Delay(difference);
+
+                    response = await _client.GetAsync(url);
+                    GetCurrentLimit(response.Headers);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new ArgumentException();
+                    }
+
+                    return response;
+            }
         }
 
-        public async Task<HttpResponseMessage> PostRequestAsync(string url, HttpContent content = null)
+        public async Task<HttpResponseMessage> PostRequestAsync(string url)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
-            content = new StringContent("");
-            return await _client.PostAsync(url, content);
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            var response = await _client.PostAsync(url, null);
+            response.EnsureSuccessStatusCode();
+            return response;
+        }
+
+
+        private void GetCurrentLimit(HttpHeaders headers)
+        {
+            CurrentLimitMonth = int.Parse(headers.GetValues("x-rate-limit-remaining-month").First());
+            CurrentLimitMinute = int.Parse(headers.GetValues("x-rate-limit-remaining-minute").First());
+            LastDateRequest = DateTime.Parse(headers.GetValues("Date").First());
         }
 
         public void Dispose()
@@ -87,19 +115,25 @@ namespace OpenDotaApi.Utilities
             GC.SuppressFinalize(this);
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
+            {
                 return;
+            }
 
             if (disposing)
             {
-                _clientHandler.Dispose();
-                _client.Dispose();
+                _handler?.Dispose();
+                _client?.Dispose();
             }
 
             _disposed = true;
         }
+
+        ~RequestHandler()
+        {
+            Dispose(false);
+        }
     }
-  
 }
