@@ -6,14 +6,14 @@ namespace OpenDotaApi.Api.Benchmarks
     using Model;
     public class BenchmarksEndpoint: IBenchmarksEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public BenchmarksEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public BenchmarksEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<Benchmarks> GetStatValuesByIdHeroAsync(int idHero) =>
-            await _request.GetResponseAsync<Benchmarks>($"benchmarks",$"hero_id={idHero}");
+            await _formatter.DeserializeAsync<Benchmarks>($"benchmarks",$"hero_id={idHero}");
     }
 }

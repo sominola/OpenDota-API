@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.Replay
+namespace OpenDotaApi.Api.Replays
 {
     using Model;
-    public interface IReplayEndpoint
+    public interface IReplaysEndpoint
     {
         Task<List<Replay>> GetReplayDataAsync(List<long> matchIds = null);
     }

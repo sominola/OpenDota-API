@@ -7,14 +7,14 @@ namespace OpenDotaApi.Api.Search
 {
     public class SearchEndpoint: ISearchEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public SearchEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public SearchEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<SearchPlayer>> GetListPlayersByNameAsync(string name) =>
-            await _request.GetResponseAsync<List<SearchPlayer>>($"search",$"q={name}");
+            await _formatter.DeserializeAsync<List<SearchPlayer>>($"search",$"q={name}");
     }
 }

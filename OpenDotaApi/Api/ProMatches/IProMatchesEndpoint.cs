@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.ProMatch
+namespace OpenDotaApi.Api.ProMatches
 {
     using Model;
-    public interface IProMatchEndpoint
+
+    public interface IProMatchesEndpoint
     {
         Task<List<ProMatch>> GetListProMatchesAsync(long? lessThanMatchId = null);
     }

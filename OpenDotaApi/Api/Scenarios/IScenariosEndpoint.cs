@@ -8,7 +8,7 @@ namespace OpenDotaApi.Api.Scenarios
     public interface IScenariosEndpoint
     {
         Task<List<ItemTiming>> GetWinRateForCertainItemTimingsOnHeroesAsync(string item = null, int? heroId = null);
-        Task<List<LaneRoles>> GetWinRateForHeroes(HeroLaneRole? role = null, int? heroId = null);
-        Task<List<TeamScenarios>> GetTeamScenarios(Enums.Scenarios? scenario = null);
+        Task<List<LaneRoles>> GetWinRateForHeroesAsync(HeroLaneRole? role = null, int? heroId = null);
+        Task<List<TeamScenarios>> GetTeamScenariosAsync(Enums.Scenarios? scenario = null);
     }
 }

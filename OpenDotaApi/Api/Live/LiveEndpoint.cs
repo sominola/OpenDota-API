@@ -7,15 +7,15 @@ namespace OpenDotaApi.Api.Live
     using Model;
     public class LiveEndpoint: ILiveEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public LiveEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public LiveEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<Live>> GetProLiveGamesAsync() =>
-            await _request.GetResponseAsync<List<Live>>("live");
+            await _formatter.DeserializeAsync<List<Live>>("live");
 
     }
 }

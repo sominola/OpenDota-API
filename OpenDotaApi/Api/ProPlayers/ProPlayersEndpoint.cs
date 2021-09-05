@@ -1,0 +1,21 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using OpenDotaApi.Utilities;
+
+namespace OpenDotaApi.Api.ProPlayers
+{
+    using Model;
+
+    public class ProPlayersEndpoint : IProPlayersEndpoint
+    {
+        private readonly JsonFormatter _formatter;
+        
+        public ProPlayersEndpoint(JsonFormatter formatter)
+        {
+            _formatter = formatter;
+        }
+        
+        public async Task<List<ProPlayer>> GetListProPlayersAsync() =>
+            await _formatter.DeserializeAsync<List<ProPlayer>>($"proPlayers");
+    }
+}

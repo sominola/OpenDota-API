@@ -6,15 +6,15 @@ namespace OpenDotaApi.Api.Health
     using Model;
     public class HealthEndpoint: IHealthEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public HealthEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public HealthEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<Health> GetServiceHealthDataAsync() =>
-            await _request.GetResponseAsync<Health>("health");
+            await _formatter.DeserializeAsync<Health>("health");
 
     }
 }

@@ -7,14 +7,14 @@ namespace OpenDotaApi.Api.Leagues
     using Model;
     public class LeaguesEndpoint : ILeaguesEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public LeaguesEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public LeaguesEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<Leagues>> GetLeaguesAsync() =>
-            await _request.GetResponseAsync<List<Leagues>>("leagues");
+            await _formatter.DeserializeAsync<List<Leagues>>("leagues");
     }
 }

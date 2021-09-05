@@ -7,14 +7,15 @@ namespace OpenDotaApi.Api.PlayersByRank
     using Model;
     public class PlayersByRankEndpoint : IPlayersByRankEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public PlayersByRankEndpoint(RequestHandler requestHandler)
+        private readonly JsonFormatter _formatter;
+        
+        public PlayersByRankEndpoint(JsonFormatter formatter)
         {
-            _request = requestHandler;
+            _formatter = formatter;
         }
+        
         public async Task<List<PlayersByRank>> GetListPlayersByRankAsync() =>
-            await _request.GetResponseAsync<List<PlayersByRank>>($"playersByRank");
+            await _formatter.DeserializeAsync<List<PlayersByRank>>($"playersByRank");
 
     }
 }

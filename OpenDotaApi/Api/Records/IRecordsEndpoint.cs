@@ -6,8 +6,8 @@ namespace OpenDotaApi.Api.Records
 {
     using Model;
 
-    public interface IRecordEndpoint
+    public interface IRecordsEndpoint
     {
-        Task<List<Record>> GetRecordsByField(RecordField fields);
+        Task<List<Record>> GetRecordsByFieldAsync(RecordField fields);
     }
 }

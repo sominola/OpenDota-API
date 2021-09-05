@@ -11,26 +11,26 @@ namespace OpenDotaApi.Api.Teams
 
     public class TeamsEndpoint : ITeamsEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public TeamsEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public TeamsEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<Team>> GetTeamsAsync() =>
-            await _request.GetResponseAsync<List<Team>>("teams");
+            await _formatter.DeserializeAsync<List<Team>>("teams");
 
         public async Task<Team> GetTeamByIdAsync(long teamId) =>
-            await _request.GetResponseAsync<Team>($"teams/{teamId}");
+            await _formatter.DeserializeAsync<Team>($"teams/{teamId}");
 
         public async Task<List<Match>> GetMatchesAsync(long teamId) =>
-            await _request.GetResponseAsync<List<Match>>($"teams/{teamId}/matches");
+            await _formatter.DeserializeAsync<List<Match>>($"teams/{teamId}/matches");
 
         public async Task<List<Player>> GetPlayersAsync(long teamId) =>
-            await _request.GetResponseAsync<List<Player>>($"teams/{teamId}/players");
+            await _formatter.DeserializeAsync<List<Player>>($"teams/{teamId}/players");
 
         public async Task<List<Hero>> GetHeroesAsync(long teamId) =>
-            await _request.GetResponseAsync<List<Hero>>($"teams/{teamId}/heroes");
+            await _formatter.DeserializeAsync<List<Hero>>($"teams/{teamId}/heroes");
     }
 }

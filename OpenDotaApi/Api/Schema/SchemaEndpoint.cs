@@ -8,14 +8,14 @@ namespace OpenDotaApi.Api.Schema
 
     public class SchemaEndpoint : ISchemaEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public SchemaEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public SchemaEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
-        public async Task<List<Schema>> GetDataSchema() =>
-            await _request.GetResponseAsync<List<Schema>>("schema");
+        public async Task<List<Schema>> GetDataSchemaAsync() =>
+            await _formatter.DeserializeAsync<List<Schema>>("schema");
     }
 }

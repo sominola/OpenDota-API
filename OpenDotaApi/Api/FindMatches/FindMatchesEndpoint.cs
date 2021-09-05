@@ -8,11 +8,11 @@ namespace OpenDotaApi.Api.FindMatches
 
     public class FindMatchesEndpoint : IFindMatchesEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public FindMatchesEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public FindMatchesEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<FindMatches>> FindsRecentMatchesByHeroesPlayedAsync(List<int> teamA = null, List<int> teamB = null)
@@ -24,7 +24,7 @@ namespace OpenDotaApi.Api.FindMatches
             if (teamB != null)
                 foreach (var val in teamB)
                     parameters += $"&teamB={val}";
-            return await _request.GetResponseAsync<List<FindMatches>>("findMatches" , parameters);
+            return await _formatter.DeserializeAsync<List<FindMatches>>("findMatches" , parameters);
         }
     }
 }

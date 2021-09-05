@@ -8,14 +8,14 @@ namespace OpenDotaApi.Api.HeroStats
 
     public class HeroStatsEndpoint : IHeroStatsEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public HeroStatsEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public HeroStatsEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<List<HeroStats>> GetHeroStatsAsync() =>
-            await _request.GetResponseAsync<List<HeroStats>>("heroStats");
+            await _formatter.DeserializeAsync<List<HeroStats>>("heroStats");
     }
 }

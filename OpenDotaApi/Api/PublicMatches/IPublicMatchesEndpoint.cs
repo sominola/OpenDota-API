@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.PublicMatch
+namespace OpenDotaApi.Api.PublicMatches
 {
     using Model;
-    public interface IPublicMatchEndpoint
+    public interface IPublicMatchesEndpoint
     {
         Task<List<PublicMatch>> GetListPublicMatchesAsync(int? mmrAscending = null, int? mmrDescending = null, long? lessThanMatchId = null);
     }

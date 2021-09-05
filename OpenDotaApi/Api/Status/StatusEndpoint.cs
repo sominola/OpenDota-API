@@ -6,14 +6,14 @@ namespace OpenDotaApi.Api.Status
     using Model;
     public class StatusEndpoint: IStatusEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public StatusEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public StatusEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<Status> GetServiceStatisticsAsync() =>
-            await _request.GetResponseAsync<Status>("status");
+            await _formatter.DeserializeAsync<Status>("status");
     }
 }

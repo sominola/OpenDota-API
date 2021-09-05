@@ -7,14 +7,14 @@ namespace OpenDotaApi.Api.Distributions
 
     public class DistributionsEndpoint : IDistributionsEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public DistributionsEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public DistributionsEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<Distributions> GetDistributionsAsync() =>
-            await _request.GetResponseAsync<Distributions>("distributions");
+            await _formatter.DeserializeAsync<Distributions>("distributions");
     }
 }

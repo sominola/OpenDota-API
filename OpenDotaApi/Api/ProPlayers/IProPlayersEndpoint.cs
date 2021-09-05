@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.ProPlayer
+namespace OpenDotaApi.Api.ProPlayers
 {
     using Model;
-    public interface IProPlayerEndpoint
+
+    public interface IProPlayersEndpoint
     {
         Task<List<ProPlayer>> GetListProPlayersAsync();
     }

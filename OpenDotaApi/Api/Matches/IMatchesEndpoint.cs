@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
+using OpenDotaApi.Api.Matches.Model;
 
-namespace OpenDotaApi.Api.Match
+namespace OpenDotaApi.Api.Matches
 {
-    using Model;
-
     public interface IMatchesEndpoint
     {
         Task<Match> GetMatchAsync(long matchId);

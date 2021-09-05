@@ -1,22 +1,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.Player
+
+namespace OpenDotaApi.Api.Players
 {
     using Model;
-    using Model.WinLoss;
-    using Model.RecentMatches;
-    using Model.Matches;
+    using Model.Histograms;
     using Model.Peers;
     using Model.Pro;
-    using Model.Totals;
-    using Model.Histograms;
-    using Model.WardMap;
-    using Model.WordCloud;
     using Model.Ratings;
-    using Model.Rankings;
-
-    public interface IPlayerEndpoint
+    using Model.RecentMatches;
+    using Model.Totals;
+    using Model.WardMap;
+    using Model.WinLoss;
+    using Model.WordCloud;
+    public interface IPlayersEndpoint
     {
         Task<Player> GetPlayerAsync(long playerId);
 
@@ -24,7 +22,7 @@ namespace OpenDotaApi.Api.Player
 
         Task<List<RecentMatches>> GetRecentMatchesAsync(long playerId);
 
-        Task<List<Matches>> GetMatchesAsync(long playerId, PlayerParameters parameters = null);
+        Task<List<Model.Matches.Matches>> GetMatchesAsync(long playerId, PlayerParameters parameters = null);
 
         Task<List<Model.Heroes.Heroes>> GetHeroesAsync(long playerId, PlayerParameters parameters = null);
 
@@ -36,14 +34,14 @@ namespace OpenDotaApi.Api.Player
 
         Task<List<Histograms>> GetHistogramsAsync(long playerId, string field, PlayerParameters parameters = null);
 
-        Task<List<WardMap>> GetWardMapAsync(long playerId, PlayerParameters parameters = null);
+        Task<WardMap> GetWardMapAsync(long playerId, PlayerParameters parameters = null);
 
-        Task<List<WordCloud>> GetWordCloudAsync(long playerId, PlayerParameters parameters = null);
+        Task<WordCloud> GetWordCloudAsync(long playerId, PlayerParameters parameters = null);
 
         Task<List<Ratings>> GetRatingsAsync(long playerId);
 
-        Task<List<Rankings>> GetRankingsAsync(long playerId);
+        Task<List<Model.Rankings.Rankings>> GetRankingsAsync(long playerId);
 
-        Task<bool> RefreshPlayerMatchHistory(long playerId);
+        Task<bool> RefreshPlayerMatchHistoryAsync(long playerId);
     }
 }

@@ -7,14 +7,14 @@ namespace OpenDotaApi.Api.Metadata
 
     public class MetadataEndpoint : IMetadataEndpoint
     {
-        private readonly RequestHandler _request;
-
-        public MetadataEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public MetadataEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
         public async Task<Metadata> GetMetadataAsync() =>
-            await _request.GetResponseAsync<Metadata>("metadata");
+            await _formatter.DeserializeAsync<Metadata>("metadata");
     }
 }

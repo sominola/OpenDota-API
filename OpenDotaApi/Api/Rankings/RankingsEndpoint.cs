@@ -6,14 +6,15 @@ namespace OpenDotaApi.Api.Rankings
     using Model;
     public class RankingsEndpoint: IRankingsEndpoint
     {
-        private readonly RequestHandler _request;
-        public RankingsEndpoint(RequestHandler request)
+        private readonly JsonFormatter _formatter;
+        
+        public RankingsEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
-        public async Task<Rankings> GetTopPlayersByHero(int idHero) =>
-            await _request.GetResponseAsync<Rankings>($"rankings",$"hero_id={idHero}");
+        public async Task<Rankings> GetTopPlayersByHeroAsync(int idHero) =>
+            await _formatter.DeserializeAsync<Rankings>($"rankings",$"hero_id={idHero}");
 
     }
 }

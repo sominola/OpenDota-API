@@ -6,6 +6,6 @@ namespace OpenDotaApi.Api.Schema
     using Model;
     public interface ISchemaEndpoint
     {
-        Task<List<Schema>> GetDataSchema();
+        Task<List<Schema>> GetDataSchemaAsync();
     }
 }

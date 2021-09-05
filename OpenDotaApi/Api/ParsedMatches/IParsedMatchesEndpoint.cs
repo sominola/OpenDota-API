@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenDotaApi.Api.ParsedMatch
+namespace OpenDotaApi.Api.ParsedMatches
 {
     using Model;
-    public interface IParsedMatchEndpoint
+
+    public interface IParsedMatchesEndpoint
     {
         Task<List<ParsedMatch>> GetListParsedMatches(long? lessThanMatchId = null);
     }
