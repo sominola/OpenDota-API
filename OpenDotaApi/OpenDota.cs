@@ -58,8 +58,8 @@ namespace OpenDotaApi
             HeroStats = new HeroStatsEndpoint(_jsonFormatter);
             Leagues = new LeaguesEndpoint(_jsonFormatter);
             Teams = new TeamsEndpoint(_jsonFormatter);
-            Replayses = new ReplaysEndpoint(_jsonFormatter);
-            Recordses = new RecordsEndpoint(_jsonFormatter);
+            Replays = new ReplaysEndpoint(_jsonFormatter);
+            Records = new RecordsEndpoint(_jsonFormatter);
             Live = new LiveEndpoint(_jsonFormatter);
             Scenarios = new ScenariosEndpoint(_jsonFormatter);
             Schema = new SchemaEndpoint(_jsonFormatter);
@@ -89,8 +89,8 @@ namespace OpenDotaApi
         public readonly IHeroStatsEndpoint HeroStats;
         public readonly ILeaguesEndpoint Leagues;
         public readonly ITeamsEndpoint Teams;
-        public readonly IReplaysEndpoint Replayses;
-        public readonly IRecordsEndpoint Recordses;
+        public readonly IReplaysEndpoint Replays;
+        public readonly IRecordsEndpoint Records;
         public readonly ILiveEndpoint Live;
         public readonly IScenariosEndpoint Scenarios;
         public readonly ISchemaEndpoint Schema;
