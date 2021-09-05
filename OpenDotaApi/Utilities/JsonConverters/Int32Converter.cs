@@ -12,8 +12,8 @@ namespace OpenDotaApi.Utilities.JsonConverters
             {
                 case JsonTokenType.String:
                 {
-                    string stringValue = reader.GetString();
-                    if (int.TryParse(stringValue, out int value))
+                    var stringValue = reader.GetString();
+                    if (int.TryParse(stringValue, out var value))
                     {
                         return value;
                     }

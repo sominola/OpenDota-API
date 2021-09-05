@@ -14,7 +14,7 @@ namespace OpenDotaApi.Utilities.JsonConverters
             {
                 case JsonTokenType.String:
                 {
-                    if (long.TryParse(reader.GetString(), out long value))
+                    if (long.TryParse(reader.GetString(), out var value))
                     {
                         return new DateTime(Epoch.Ticks + value * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
                     }
