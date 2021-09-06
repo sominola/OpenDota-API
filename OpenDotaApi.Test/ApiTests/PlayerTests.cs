@@ -35,20 +35,19 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async void TestGetMatchesAsync()
         {
-            // var data = await _openDota.Players.GetMatchesAsync(164583656);
-            // Assert.Null(data.First().Version);
-            // Assert.Equal(0, data.First().LeaverStatus);
+            var data = await _openDota.Players.GetMatchesAsync(164583656);
+            Assert.Null(data.First().Version);
+            Assert.NotEmpty(data);
+            var playerParameters = new PlayerParameters
+            {
+                IncludedAccountId = new List<int>()
+                {
+                    196346369
+                }
+            };
 
-            // var playerParameters = new PlayerParameters
-            // {
-            //     IncludedAccountId = new List<int>()
-            //     {
-            //         196346369
-            //     }
-            // };
-            //
-            // var data1 = await _openDota.Players.GetMatchesAsync(164583656, playerParameters);
-            // Assert.Equal(6149167716, data1.First().MatchId);
+            var data1 = await _openDota.Players.GetMatchesAsync(164583656, playerParameters);
+            Assert.Equal(6149167716, data1.First().MatchId);
         }
 
         [Fact]
@@ -127,19 +126,19 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async void TestGetHistogramsAsync()
         {
-            var data = await _openDota.Players.GetHistogramsAsync(113995822, "kills");
-            Assert.NotEmpty(data);
+            // var data = await _openDota.Players.GetHistogramsAsync(113995822, "kills");
+            // Assert.NotEmpty(data);
+            //
+            // var playerParameters = new PlayerParameters
+            // {
+            //     WithHeroId = new List<int>
+            //     {
+            //         42
+            //     }
+            // };
 
-            var playerParameters = new PlayerParameters
-            {
-                WithHeroId = new List<int>
-                {
-                    42
-                }
-            };
-
-            var data1 = await _openDota.Players.GetHistogramsAsync(113995822, "kills", playerParameters);
-            Assert.NotEmpty(data1);
+            // var data1 = await _openDota.Players.GetHistogramsAsync(113995822, "kills", playerParameters);
+            // Assert.NotEmpty(data1);
         }
 
         [Fact]
