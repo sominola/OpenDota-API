@@ -17,12 +17,14 @@ jobs:
       - run:
           # Update this line with the directory that contains your tests project file
           working_directory: ~/project/App.Tests
+           name: restore
+           command: |
+             dotnet restore
+
           name: Run tests
           command: |
-	    dotnet restore
             dotnet test
             
-
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
