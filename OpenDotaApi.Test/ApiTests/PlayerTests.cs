@@ -35,9 +35,9 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async void TestGetMatchesAsync()
         {
-            var data = await _openDota.Players.GetMatchesAsync(164583656);
-            Assert.Null(data.First().Version);
-            Assert.Equal(0, data.First().LeaverStatus);
+            // var data = await _openDota.Players.GetMatchesAsync(164583656);
+            // Assert.Null(data.First().Version);
+            // Assert.Equal(0, data.First().LeaverStatus);
 
             // var playerParameters = new PlayerParameters
             // {
