@@ -59,13 +59,8 @@ namespace OpenDotaApi.Utilities
 
             switch (CurrentLimitMinute)
             {
-                case > 0:
+                case <= 0:
                 {
-                    response = await _client.GetAsync(url);
-                    GetCurrentLimit(response.Headers);
-                    return response;
-                }
-                default:
                     var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
 
                     await Task.Delay(difference);
@@ -73,6 +68,11 @@ namespace OpenDotaApi.Utilities
                     response = await _client.GetAsync(url);
                     GetCurrentLimit(response.Headers);
 
+                    return response;
+                }
+                default:
+                    response = await _client.GetAsync(url);
+                    GetCurrentLimit(response.Headers);
                     return response;
             }
         }

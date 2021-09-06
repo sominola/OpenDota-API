@@ -33,9 +33,10 @@ namespace OpenDotaApi
 
     public class OpenDota : IDisposable
     {
-        public OpenDota(string apiKey = null, IWebProxy proxy = null)
+        public OpenDota(string apiKey = null, IWebProxy proxy = null, RequestHandler request = null)
         {
-            _request = new RequestHandler(apiKey, proxy);
+            _request = request;
+            _request ??= new RequestHandler();
             _jsonFormatter = new JsonFormatter(_request);
 
             Matches = new MatchesEndpoint(_jsonFormatter);
