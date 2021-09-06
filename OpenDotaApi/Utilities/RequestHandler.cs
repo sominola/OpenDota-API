@@ -37,12 +37,10 @@ namespace OpenDotaApi.Utilities
                 throw new ArgumentNullException(nameof(url));
             }
 
-
             if (ApiKey != null)
             {
                 parameters += $"&api_key={ApiKey}";
             }
-
 
             url += "?" + parameters;
 
@@ -52,11 +50,6 @@ namespace OpenDotaApi.Utilities
             {
                 response = await _client.GetAsync(url);
                 GetCurrentLimit(response.Headers);
-
-                if (CurrentLimitMinute == null)
-                {
-                    throw new NullReferenceException();
-                }
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -79,11 +72,6 @@ namespace OpenDotaApi.Utilities
 
                     response = await _client.GetAsync(url);
                     GetCurrentLimit(response.Headers);
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        throw new ArgumentException();
-                    }
 
                     return response;
             }
