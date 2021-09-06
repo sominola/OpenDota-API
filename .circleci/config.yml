@@ -19,6 +19,7 @@ jobs:
           working_directory: ~/project/App.Tests
           name: Run tests
           command: |
+	    dotnet restore
             dotnet test
             
 
