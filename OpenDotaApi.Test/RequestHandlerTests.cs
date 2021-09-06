@@ -1,18 +1,19 @@
 using System;
+using OpenDotaApi.Test.ApiTests;
 using OpenDotaApi.Utilities;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace OpenDotaApi.Test
 {
-    public class RequestHandlerTests : IDisposable
+    public class RequestHandlerTests : IClassFixture<OpenDotaTestsFixtures>
     {
         private readonly RequestHandler _request;
         private readonly ITestOutputHelper _output;
 
-        public RequestHandlerTests(ITestOutputHelper output)
+        public RequestHandlerTests(OpenDotaTestsFixtures fixtures, ITestOutputHelper output)
         {
-            _request = new RequestHandler();
+            _request = fixtures.RequestHandler;
             _output = output;
         }
 
