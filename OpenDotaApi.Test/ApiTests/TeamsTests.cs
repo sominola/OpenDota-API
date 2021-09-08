@@ -13,7 +13,7 @@ namespace OpenDotaApi.Test.ApiTests
         public async void TestGetTeamsAsync()
         {
             var data = await _openDota.Teams.GetTeamsAsync();
-            Assert.Equal(1883502, data.First().TeamId);
+            Assert.NotEmpty(data);
         }
 
         [Fact]

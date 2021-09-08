@@ -10,13 +10,6 @@ namespace OpenDotaApi.Test
         public JsonFormatterTests() => _formatter = new JsonFormatter(new RequestHandler());
 
         [Fact]
-        public async void TestIsNullWhenStatusCodeNotSuccess()
-        {
-            var data = await _formatter.DeserializeAsync<object>("test");
-            Assert.Null(data);
-        }
-
-        [Fact]
         public async void TestThrowExceptionWhenNull()
         {
             await Assert.ThrowsAsync<NullReferenceException>(async () =>

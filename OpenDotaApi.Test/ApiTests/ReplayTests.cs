@@ -17,7 +17,7 @@ namespace OpenDotaApi.Test.ApiTests
             {
                 6160273077
             };
-            var data = await _openDota.Replayses.GetReplayDataAsync(listMatches);
+            var data = await _openDota.Replays.GetReplayDataAsync(listMatches);
             Assert.Equal(273, data.First().Cluster);
         }
     }

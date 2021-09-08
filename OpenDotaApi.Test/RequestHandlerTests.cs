@@ -1,4 +1,5 @@
 using System;
+using OpenDotaApi.Test.ApiTests;
 using OpenDotaApi.Utilities;
 using Xunit;
 using Xunit.Abstractions;
@@ -12,8 +13,8 @@ namespace OpenDotaApi.Test
 
         public RequestHandlerTests(ITestOutputHelper output)
         {
-            _request = new RequestHandler();
             _output = output;
+            _request = new RequestHandler();
         }
 
         [Fact]

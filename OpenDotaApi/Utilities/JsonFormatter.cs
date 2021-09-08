@@ -25,9 +25,6 @@ namespace OpenDotaApi.Utilities
         {
             var response = await _request.GetResponseAsync(url, parameters);
 
-            if (!response.IsSuccessStatusCode)
-                return null;
-
             var stream = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync<T>(stream, _options);
         }
