@@ -1,6 +1,6 @@
 <img align="right" width="144" height="144" src="https://www.opendota.com/assets/images/icons/icon-144x144.png">
 
-# OpenDotaApi [![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=plastic?maxAge=2592000)](https://www.nuget.org/packages/OpenDotaApi)
+# OpenDotaApi [![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=flat-square)](https://www.nuget.org/packages/OpenDotaApi) [![NuGet](https://img.shields.io/github/workflow/status/sominola/opendota-api/.NET?style=flat-square)](https://github.com/sominola/OpenDota-API/actions)
 
 ##### An unofficial .NET API Wrapper for the OpenDota API.
 
