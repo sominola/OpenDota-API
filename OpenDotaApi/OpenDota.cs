@@ -1,15 +1,18 @@
+using System;
 using System.Net;
+using OpenDotaApi.Utilities;
 
 namespace OpenDotaApi
 {
-    using Utilities;
-    using Api.Match;
-    using Api.Player;
+    using Api.Heroes;
+    using Api.Matches;
+    using Api.ParsedMatches;
+    using Api.Players;
+    using Api.ProMatches;
+    using Api.ProPlayers;
+    using Api.PublicMatches;
+    using Api.Replays;
     using Api.PlayersByRank;
-    using Api.ProPlayer;
-    using Api.ProMatch;
-    using Api.PublicMatch;
-    using Api.ParsedMatch;
     using Api.Metadata;
     using Api.Distributions;
     using Api.Search;
@@ -19,56 +22,60 @@ namespace OpenDotaApi
     using Api.Health;
     using Api.Request;
     using Api.FindMatches;
-    using Api.Hero;
     using Api.HeroStats;
     using Api.Leagues;
     using Api.Teams;
-    using Api.Replay;
     using Api.Records;
     using Api.Live;
     using Api.Scenarios;
     using Api.Schema;
     using Api.Constants;
-    public class OpenDota
+
+    public class OpenDota : IDisposable
     {
         public OpenDota(string apiKey = null, IWebProxy proxy = null)
         {
-            var request = new RequestHandler(apiKey,proxy);
-            Matches = new MatchesEndpoint(request);
-            PlayersByRank = new PlayersByRankEndpoint(request);
-            Player = new PlayerEndpoint(request);
-            ProPlayer = new ProPlayerEndpoint(request);
-            ProMatch = new ProMatchEndpoint(request);
-            PublicMatch = new PublicMatchEndpoint(request);
-            ParsedMatch = new ParsedMatchEndpoint(request);
-            Metadata = new MetadataEndpoint(request);
-            Distributions = new DistributionsEndpoint(request);
-            Search = new SearchEndpoint(request);
-            Rankings = new RankingsEndpoint(request);
-            Benchmarks = new BenchmarksEndpoint(request);
-            Status = new StatusEndpoint(request);
-            Health = new HealthEndpoint(request);
-            Request = new RequestEndpoint(request);
-            FindMatches = new FindMatchesEndpoint(request);
-            Hero = new HeroEndpoint(request);
-            HeroStats = new HeroStatsEndpoint(request);
-            Leagues = new LeaguesEndpoint(request);
-            Teams = new TeamsEndpoint(request);
-            Replays = new ReplayEndpoint(request);
-            Records = new RecordEndpoint(request);
-            Live = new LiveEndpoint(request);
-            Scenarios = new ScenariosEndpoint(request);
-            Schema = new SchemaEndpoint(request);
-            Constants = new ConstantsEndpoint(request);
+            _request = new RequestHandler();
+            _jsonFormatter = new JsonFormatter(_request);
+
+            Matches = new MatchesEndpoint(_jsonFormatter);
+            PlayersByRank = new PlayersByRankEndpoint(_jsonFormatter);
+            Players = new PlayersEndpoint(_jsonFormatter, _request);
+            ProPlayers = new ProPlayersEndpoint(_jsonFormatter);
+            ProMatches = new ProMatchesEndpoint(_jsonFormatter);
+            PublicMatches = new PublicMatchesEndpoint(_jsonFormatter);
+            ParsedMatches = new ParsedMatchesEndpoint(_jsonFormatter);
+            Metadata = new MetadataEndpoint(_jsonFormatter);
+            Distributions = new DistributionsEndpoint(_jsonFormatter);
+            Search = new SearchEndpoint(_jsonFormatter);
+            Rankings = new RankingsEndpoint(_jsonFormatter);
+            Benchmarks = new BenchmarksEndpoint(_jsonFormatter);
+            Status = new StatusEndpoint(_jsonFormatter);
+            Health = new HealthEndpoint(_jsonFormatter);
+            Request = new RequestEndpoint(_jsonFormatter, _request);
+            FindMatches = new FindMatchesEndpoint(_jsonFormatter);
+            Heroes = new HeroesEndpoint(_jsonFormatter);
+            HeroStats = new HeroStatsEndpoint(_jsonFormatter);
+            Leagues = new LeaguesEndpoint(_jsonFormatter);
+            Teams = new TeamsEndpoint(_jsonFormatter);
+            Replays = new ReplaysEndpoint(_jsonFormatter);
+            Records = new RecordsEndpoint(_jsonFormatter);
+            Live = new LiveEndpoint(_jsonFormatter);
+            Scenarios = new ScenariosEndpoint(_jsonFormatter);
+            Schema = new SchemaEndpoint(_jsonFormatter);
+            Constants = new ConstantsEndpoint(_jsonFormatter, _request);
         }
+
+        private readonly RequestHandler _request;
+        private readonly JsonFormatter _jsonFormatter;
 
         public readonly IMatchesEndpoint Matches;
         public readonly IPlayersByRankEndpoint PlayersByRank;
-        public readonly IPlayerEndpoint Player;
-        public readonly IProPlayerEndpoint ProPlayer;
-        public readonly IProMatchEndpoint ProMatch;
-        public readonly IPublicMatchEndpoint PublicMatch;
-        public readonly IParsedMatchEndpoint ParsedMatch;
+        public readonly IPlayersEndpoint Players;
+        public readonly IProPlayersEndpoint ProPlayers;
+        public readonly IProMatchesEndpoint ProMatches;
+        public readonly IPublicMatchesEndpoint PublicMatches;
+        public readonly IParsedMatchesEndpoint ParsedMatches;
         public readonly IMetadataEndpoint Metadata;
         public readonly IDistributionsEndpoint Distributions;
         public readonly ISearchEndpoint Search;
@@ -78,15 +85,30 @@ namespace OpenDotaApi
         public readonly IHealthEndpoint Health;
         public readonly IRequestEndpoint Request;
         public readonly IFindMatchesEndpoint FindMatches;
-        public readonly IHeroEndpoint Hero;
+        public readonly IHeroesEndpoint Heroes;
         public readonly IHeroStatsEndpoint HeroStats;
         public readonly ILeaguesEndpoint Leagues;
         public readonly ITeamsEndpoint Teams;
-        public readonly IReplayEndpoint Replays;
-        public readonly IRecordEndpoint Records;
+        public readonly IReplaysEndpoint Replays;
+        public readonly IRecordsEndpoint Records;
         public readonly ILiveEndpoint Live;
         public readonly IScenariosEndpoint Scenarios;
         public readonly ISchemaEndpoint Schema;
         public readonly IConstantsEndpoint Constants;
+
+        public int? GetCurrentLimitMinute()
+        {
+            return _request.CurrentLimitMinute;
+        }
+
+        public int? GetCurrentLimitMonth()
+        {
+            return _request.CurrentLimitMonth;
+        }
+
+        public void Dispose()
+        {
+            _jsonFormatter.Dispose();
+        }
     }
 }
