@@ -12,7 +12,7 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async void TestGetRecordsByField()
         {
-            var data = await _openDota.Recordses.GetRecordsByFieldAsync(RecordField.Kills);
+            var data = await _openDota.Records.GetRecordsByFieldAsync(RecordField.Kills);
             Assert.NotEmpty(data);
         }
     }

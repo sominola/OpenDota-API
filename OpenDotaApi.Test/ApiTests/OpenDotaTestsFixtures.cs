@@ -1,4 +1,5 @@
 using System;
+using OpenDotaApi.Utilities;
 
 namespace OpenDotaApi.Test.ApiTests
 {
@@ -8,6 +9,7 @@ namespace OpenDotaApi.Test.ApiTests
         {
             OpenDota = new OpenDota();
         }
+
         public OpenDota OpenDota { get; private set; }
 
         public void Dispose()
