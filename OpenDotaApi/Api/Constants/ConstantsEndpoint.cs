@@ -7,12 +7,10 @@ namespace OpenDotaApi.Api.Constants
 {
     public class ConstantsEndpoint: IConstantsEndpoint
     {
-        private readonly JsonFormatter _formatter;
         private readonly RequestHandler _request;
 
-        public ConstantsEndpoint(JsonFormatter formatter, RequestHandler request)
+        public ConstantsEndpoint(RequestHandler request)
         {
-            _formatter = formatter;
             _request = request;
         }
 

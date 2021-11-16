@@ -15,12 +15,12 @@ The OpenDota API provides Dota 2 related data including advanced match data extr
         <PackageReleaseNotes>Added DeserializeAsync, new RequestLimit, minor improvements</PackageReleaseNotes>
         <PackageTags>dota, dota2, api, apiwrapper, api wrapper, opendota, opendota api, steam, opendota.com</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageIconUrl>https://i.imgur.com/NP2YZ2u.png</PackageIconUrl>
+        <PackageIconUrl>https://www.opendota.com/assets/images/icons/icon-144x144.png</PackageIconUrl>
         <PackageVersion>1.3</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Text.Json" Version="5.0.2" />
+      <PackageReference Include="System.Text.Json" Version="6.0.0" />
     </ItemGroup>
 
 </Project>

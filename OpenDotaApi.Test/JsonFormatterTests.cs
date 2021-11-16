@@ -4,6 +4,7 @@ using Xunit;
 
 namespace OpenDotaApi.Test
 {
+    [Collection("JsonFormmaterTest")]
     public class JsonFormatterTests : IDisposable
     {
         private readonly JsonFormatter _formatter;
@@ -21,7 +22,7 @@ namespace OpenDotaApi.Test
 
         public void Dispose()
         {
-            _formatter?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

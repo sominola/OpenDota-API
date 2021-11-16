@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenDotaApi.Utilities
 {
-    public class RequestHandler : IDisposable
+    public sealed class RequestHandler : IDisposable
     {
         private bool _disposed;
 
@@ -15,10 +15,10 @@ namespace OpenDotaApi.Utilities
         private readonly HttpClient _client;
         private DateTime _lastDateRequest;
 
-        public DateTime LastDateRequest
+        private DateTime LastDateRequest
         {
             get => _lastDateRequest;
-            private set
+            set
             {
                 if (value > _lastDateRequest)
                     _lastDateRequest = value;
@@ -39,51 +39,51 @@ namespace OpenDotaApi.Utilities
             };
         }
 
-        public async Task<HttpResponseMessage> GetResponseAsync(string url, string parameters = null,
-            bool useApiKey = true)
+        public async Task<HttpResponseMessage> GetResponseAsync(string url, string parameters = null)
         {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            if (useApiKey && ApiKey != null)
-                parameters += $"api_key={ApiKey}";
-
-            url += "?" + parameters;
-
-            HttpResponseMessage response;
-
-            if (CurrentLimitMinute == null)
+            var useApiKey = true;
+            while (true)
             {
-                response = await GetResponse(url);
+                if (string.IsNullOrEmpty(url)) throw new ArgumentNullException(nameof(url));
 
-                if (response.IsSuccessStatusCode)
-                    return response;
-            }
+                if (useApiKey && !string.IsNullOrEmpty(ApiKey)) parameters += $"api_key={ApiKey}";
 
-            switch (CurrentLimitMinute)
-            {
-                case <= 0:
-                {
-                    var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
-                    await Task.Delay(difference);
+                url += "?" + parameters;
 
-                    response = await GetResponse(url);
+                HttpResponseMessage response;
 
-                    if (!response.IsSuccessStatusCode)
-                        return await GetResponseAsync(url, null, false).ConfigureAwait(false);
-
-                    return response;
-                }
-                case > 0:
+                if (CurrentLimitMinute == null)
                 {
                     response = await GetResponse(url);
-                    if (!response.IsSuccessStatusCode)
-                        return await GetResponseAsync(url, null, false).ConfigureAwait(false);
 
-                    return response;
+                    if (response.IsSuccessStatusCode) return response;
                 }
-                default:
-                    throw new ArgumentNullException(nameof(CurrentLimitMinute));
+
+                switch (CurrentLimitMinute)
+                {
+                    case <= 0:
+                    {
+                        var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
+                        await Task.Delay(difference);
+
+                        response = await GetResponse(url);
+
+                        if (response.IsSuccessStatusCode) return response;
+                        parameters = null;
+                        useApiKey = false;
+                        continue;
+                    }
+                    case > 0:
+                    {
+                        response = await GetResponse(url);
+                        if (response.IsSuccessStatusCode) return response;
+                        parameters = null;
+                        useApiKey = false;
+                        continue;
+                    }
+                    default:
+                        throw new ArgumentNullException(nameof(CurrentLimitMinute));
+                }
             }
         }
 
@@ -155,7 +155,7 @@ namespace OpenDotaApi.Utilities
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed)
             {

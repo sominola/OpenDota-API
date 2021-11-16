@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using OpenDotaApi.Api.Players;
+using System.Threading.Tasks;
 using Xunit;
+
 
 namespace OpenDotaApi.Test.ApiTests
 {
+    [Collection("ApiTest")]
     public class PlayerTests : IClassFixture<OpenDotaTestsFixtures>
     {
         private readonly OpenDota _openDota;
@@ -12,28 +14,28 @@ namespace OpenDotaApi.Test.ApiTests
         public PlayerTests(OpenDotaTestsFixtures fixtures) => _openDota = fixtures.OpenDota;
 
         [Fact]
-        public async void TestGetPlayerAsync()
+        public async Task TestGetPlayerAsync()
         {
             var data = await _openDota.Players.GetPlayerAsync(164583656);
             Assert.Equal("UA", data.Profile.LocCountryCode);
         }
 
         [Fact]
-        public async void TestGetWinLossAsync()
+        public async Task TestGetWinLossAsync()
         {
             var data = await _openDota.Players.GetWinLossAsync(164583656);
             Assert.True(1270 <= data.Win);
         }
 
         [Fact]
-        public async void TestGetRecentMatchesAsync()
+        public async Task TestGetRecentMatchesAsync()
         {
             var data = await _openDota.Players.GetRecentMatchesAsync(164583656);
             Assert.NotEmpty(data);
         }
 
         [Fact]
-        public async void TestGetMatchesAsync()
+        public async Task TestGetMatchesAsync()
         {
             var data = await _openDota.Players.GetMatchesAsync(164583656);
             Assert.Null(data.First().Version);
@@ -51,7 +53,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetHeroesAsync()
+        public async Task TestGetHeroesAsync()
         {
             var data = await _openDota.Players.GetHeroesAsync(164583656);
             Assert.Equal(101, data.First().HeroId);
@@ -70,7 +72,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetPeersAsync()
+        public async Task TestGetPeersAsync()
         {
             var data = await _openDota.Players.GetPeersAsync(164583656);
             Assert.Equal(984697773, data.First().AccountId);
@@ -88,7 +90,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetProAsync()
+        public async Task TestGetProAsync()
         {
             var data = await _openDota.Players.GetProAsync(113995822);
             Assert.Equal(117483894, data[1].AccountId);
@@ -106,7 +108,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetTotalsAsync()
+        public async Task TestGetTotalsAsync()
         {
             var data = await _openDota.Players.GetTotalsAsync(113995822);
             Assert.Equal("kills", data.First().Field);
@@ -124,7 +126,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetHistogramsAsync()
+        public async Task TestGetHistogramsAsync()
         {
             var data = await _openDota.Players.GetHistogramsAsync(113995822, "kills");
             Assert.NotEmpty(data);
@@ -142,7 +144,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetWardMapAsync()
+        public async Task TestGetWardMapAsync()
         {
             var data = await _openDota.Players.GetWardMapAsync(113995822);
             Assert.Equal(1, data.Obs.First().Value.First().Value);
@@ -160,7 +162,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetWordCloudAsync()
+        public async Task TestGetWordCloudAsync()
         {
             var data = await _openDota.Players.GetWordCloudAsync(113995822);
             Assert.True(data.AllWordCounts.ContainsKey("чел"));
@@ -178,21 +180,21 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetRatingsAsync()
+        public async Task TestGetRatingsAsync()
         {
             var data = await _openDota.Players.GetRatingsAsync(113995822);
             Assert.Equal(113995822, data.First().AccountId);
         }
 
         [Fact]
-        public async void TestGetRankingsAsync()
+        public async Task TestGetRankingsAsync()
         {
             var data = await _openDota.Players.GetRankingsAsync(113995822);
             Assert.Equal(1, data.First().PercentRank);
         }
 
         [Fact]
-        public async void TestRefreshPlayerMatchHistory()
+        public async Task TestRefreshPlayerMatchHistory()
         {
             var data = await _openDota.Players.RefreshPlayerMatchHistoryAsync(113995822);
 
