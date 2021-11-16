@@ -35,7 +35,7 @@ namespace OpenDotaApi
     {
         public OpenDota(string apiKey = null, IWebProxy proxy = null)
         {
-            _request = new RequestHandler();
+            _request = new RequestHandler(apiKey, proxy);
             _jsonFormatter = new JsonFormatter(_request);
 
             Matches = new MatchesEndpoint(_jsonFormatter);
@@ -63,9 +63,14 @@ namespace OpenDotaApi
             Live = new LiveEndpoint(_jsonFormatter);
             Scenarios = new ScenariosEndpoint(_jsonFormatter);
             Schema = new SchemaEndpoint(_jsonFormatter);
-            Constants = new ConstantsEndpoint(_jsonFormatter, _request);
+            Constants = new ConstantsEndpoint(_request);
         }
-
+        
+        public string ApiKey
+        {
+            get => _request.ApiKey;
+            set => _request.ApiKey = value;
+        }
         private readonly RequestHandler _request;
         private readonly JsonFormatter _jsonFormatter;
 
