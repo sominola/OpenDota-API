@@ -1,7 +1,7 @@
 <img align="right" width="144" height="144" src="https://www.opendota.com/assets/images/icons/icon-144x144.png">
 
 # OpenDotaApi 
-[![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=flat-square)](https://www.nuget.org/packages/OpenDotaApi) [![NuGet](https://img.shields.io/github/workflow/status/sominola/opendota-api/.NET%20Linux?style=flat-square)](https://github.com/sominola/OpenDota-API/actions) [![NuGet](https://img.shields.io/codacy/coverage/ce5c0963dd2340088feef76ff3e8526f?style=flat-square)](https://app.codacy.com/gh/sominola/OpenDota-API/files)
+[![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=flat-square)](https://www.nuget.org/packages/OpenDotaApi) [![NuGet](https://img.shields.io/github/workflow/status/sominola/opendota-api/.NET%20Linux?style=flat-square)](https://github.com/sominola/OpenDota-API/actions) [![NuGet](https://img.shields.io/codacy/coverage/ce5c0963dd2340088feef76ff3e8526f?style=flat-square)](https://app.codacy.com/gh/sominola/OpenDota-API/dashboard)
 
 ##### An unofficial .NET API Wrapper for the OpenDota API.
 
