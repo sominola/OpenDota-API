@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
 using Xunit;
+
 
 namespace OpenDotaApi.Test.ApiTests
 {
+    [Collection("ApiTest")]
     public class LiveTests: IClassFixture<OpenDotaTestsFixtures>
     {
         private readonly OpenDota _openDota;
@@ -9,7 +12,7 @@ namespace OpenDotaApi.Test.ApiTests
         public LiveTests(OpenDotaTestsFixtures fixtures) => _openDota = fixtures.OpenDota;
 
         [Fact]
-        public async void GetProLiveGamesAsync()
+        public async Task GetProLiveGamesAsync()
         {
             var data = await _openDota.Live.GetProLiveGamesAsync();
             Assert.NotEmpty(data);

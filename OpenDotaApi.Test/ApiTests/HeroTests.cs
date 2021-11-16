@@ -1,8 +1,11 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
+
 
 namespace OpenDotaApi.Test.ApiTests
 {
+    [Collection("ApiTest")]
     public class HeroTests: IClassFixture<OpenDotaTestsFixtures>
     {
         private readonly OpenDota _openDota;
@@ -10,35 +13,35 @@ namespace OpenDotaApi.Test.ApiTests
         public HeroTests(OpenDotaTestsFixtures fixtures) => _openDota = fixtures.OpenDota;
 
         [Fact]
-        public async void TestGetDataAsync()
+        public async Task TestGetDataAsync()
         {
             var data = await _openDota.Heroes.GetDataAsync();
             Assert.Equal(1, data.First().Id);
         }
         
         [Fact]
-        public async void TestGetRecentMatchesAsync()
+        public async Task TestGetRecentMatchesAsync()
         {
             var data = await _openDota.Heroes.GetRecentMatchesAsync(1);
             Assert.NotEmpty(data);
         }
 
         [Fact]
-        public async void TestGetMatchupsAsync()
+        public async Task TestGetMatchupsAsync()
         {
             var data = await _openDota.Heroes.GetMatchUpsAsync(1);
-            Assert.Equal(126, data.First().HeroId);
+            Assert.NotEmpty(data);
         }
 
         [Fact]
-        public async void TestGetDurationsAsync()
+        public async Task TestGetDurationsAsync()
         {
             var data = await _openDota.Heroes.GetDurationsAsync(1);
             Assert.Equal(5700, data.First().DurationBin);
         }
 
         [Fact]
-        public async void TestGetPlayersAsync()
+        public async Task TestGetPlayersAsync()
         {
             var data = await _openDota.Heroes.GetPlayersAsync(1);
             Assert.Equal(21289303, data.First().AccountId);
@@ -46,7 +49,7 @@ namespace OpenDotaApi.Test.ApiTests
         }
 
         [Fact]
-        public async void TestGetItemPopularity()
+        public async Task TestGetItemPopularity()
         {
             var data = await _openDota.Heroes.GetItemPopularityAsync(1);
             Assert.NotNull(data);

@@ -1,9 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
+
 
 namespace OpenDotaApi.Test.ApiTests
 {
+    [Collection("ApiTest")]
     public class FindMatchesTests: IClassFixture<OpenDotaTestsFixtures>
     {
         private readonly OpenDota _openDota;
@@ -11,11 +13,11 @@ namespace OpenDotaApi.Test.ApiTests
         public FindMatchesTests(OpenDotaTestsFixtures fixtures) => _openDota = fixtures.OpenDota;
 
         [Fact]
-        public async void TestFindsRecentMatchesByHeroesPlayedAsync()
+        public async Task TestFindsRecentMatchesByHeroesPlayedAsync()
         {
             var teamA = new List<int>()
             {
-                1,2,21,4,5
+                2,21,4,5
             };
 
             var teamB = new List<int>
@@ -24,7 +26,7 @@ namespace OpenDotaApi.Test.ApiTests
             };
 
             var data = await _openDota.FindMatches.FindsRecentMatchesByHeroesPlayedAsync(teamA,teamB);
-            Assert.Contains(14, data.First().TeamA);
+            Assert.NotEmpty(data);
         }
     }
 }
