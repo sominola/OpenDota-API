@@ -1,21 +1,16 @@
 using System;
-using OpenDotaApi.Test.ApiTests;
 using OpenDotaApi.Utilities;
 using Xunit;
-using Xunit.Abstractions;
+
 
 namespace OpenDotaApi.Test
 {
+    [Collection("RequestHandlerTest")]
     public class RequestHandlerTests : IDisposable
     {
         private readonly RequestHandler _request;
-        private readonly ITestOutputHelper _output;
 
-        public RequestHandlerTests(ITestOutputHelper output)
-        {
-            _output = output;
-            _request = new RequestHandler();
-        }
+        public RequestHandlerTests() => _request = new RequestHandler();
 
         [Fact]
         public async void TestGetResponseAsync()
@@ -39,11 +34,6 @@ namespace OpenDotaApi.Test
                     var response = await _request.GetResponseAsync("https://api.opendota.com/api/players/164583656/wl");
                     if (!response.IsSuccessStatusCode)
                         throw new Exception(response.ReasonPhrase + " " + response.StatusCode);
-                    
-                    _output.WriteLine($"{i}. Current limit minutes: " + _request.CurrentLimitMinute);
-                    _output.WriteLine($"{i}. Current limit month: " + _request.CurrentLimitMonth);
-                    _output.WriteLine($"{i}. DateTime: "+ _request.LastDateRequest);
-                    _output.WriteLine("");
                 }
             });
             Assert.Null(exception);
@@ -52,7 +42,7 @@ namespace OpenDotaApi.Test
 
         public void Dispose()
         {
-            _request?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
