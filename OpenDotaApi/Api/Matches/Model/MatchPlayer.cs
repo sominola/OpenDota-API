@@ -126,6 +126,9 @@ namespace OpenDotaApi.Api.Matches.Model
         [JsonPropertyName("item_5")]
         public long? Item5 { get; set; }
 
+        [JsonPropertyName("item_neutral")]
+        public long? NeutralItem { get; set; }
+
         [JsonPropertyName("item_uses")]
         public Dictionary<string, int> ItemUses { get; set; }
 
