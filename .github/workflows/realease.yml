@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
       - name: Checkout
         uses: actions/checkout@v3
       - name: Verify commit exists in origin/main
