@@ -1,7 +1,7 @@
 <img align="right" width="144" height="144" src="https://www.opendota.com/assets/images/icons/icon-144x144.png">
 
 # OpenDotaApi 
-[![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=flat-square)](https://www.nuget.org/packages/OpenDotaApi) [![NuGet](https://img.shields.io/github/workflow/status/sominola/opendota-api/.NET%20Linux?style=flat-square)](https://github.com/sominola/OpenDota-API/actions) [![NuGet](https://img.shields.io/codacy/coverage/ce5c0963dd2340088feef76ff3e8526f?style=flat-square)](https://app.codacy.com/gh/sominola/OpenDota-API/dashboard)
+[![NuGet](https://img.shields.io/nuget/v/OpenDotaApi?style=flat-square)](https://www.nuget.org/packages/OpenDotaApi) [![NuGet](https://img.shields.io/github/actions/workflow/status/sominola/OpenDota-API/dotnet.yml?branch=main&style=flat-square)](https://github.com/sominola/OpenDota-API/actions) [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/742ff098e44642ca8cca8abb0f5973d4)](https://www.codacy.com/gh/sominola/OpenDota-API/dashboard?utm_source=github.com&utm_medium=referral&utm_content=sominola/OpenDota-API&utm_campaign=Badge_Coverage)
 
 ##### An unofficial .NET API Wrapper for the OpenDota API.
 
