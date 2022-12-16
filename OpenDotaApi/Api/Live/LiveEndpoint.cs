@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -14,8 +15,8 @@ namespace OpenDotaApi.Api.Live
             _formatter = formatter;
         }
 
-        public async Task<List<Live>> GetProLiveGamesAsync() =>
-            await _formatter.DeserializeAsync<List<Live>>("live");
+        public async Task<List<Live>> GetProLiveGamesAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Live>>("live", null, token);
 
     }
 }

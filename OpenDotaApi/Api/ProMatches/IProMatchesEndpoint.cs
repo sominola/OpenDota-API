@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Api.ProMatches
@@ -7,6 +8,6 @@ namespace OpenDotaApi.Api.ProMatches
 
     public interface IProMatchesEndpoint
     {
-        Task<List<ProMatch>> GetListProMatchesAsync(long? lessThanMatchId = null);
+        Task<List<ProMatch>> GetListProMatchesAsync(long? lessThanMatchId = null,CancellationToken? token = default);
     }
 }

@@ -7,19 +7,37 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  build-library:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
+      - name: Display .NET version
+        run: dotnet --version
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build OpenDotaApi.sln --configuration Release -f net6.0 --no-restore
+
+      - name: Run unit tests
+        run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --settings ./OpenDotaApi.Test/test.settings.xml
+
+      - name: Copy coverage results
+        run: cp ./OpenDotaApi.Test/TestResults/**/*.xml ./OpenDotaApi.Test/TestResults/
+
+      - name: Upload code coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./OpenDotaApi.Test/TestResults/coverage.opencover.xml
+          fail_ci_if_error: true

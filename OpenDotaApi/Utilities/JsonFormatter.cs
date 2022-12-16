@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities.JsonConverters;
 
@@ -21,20 +22,23 @@ namespace OpenDotaApi.Utilities
             _options.Converters.Add(new Int64Converter());
         }
 
-        public async Task<T> DeserializeAsync<T>(string url, string parameters = null) where T : class
+        public async Task<T> DeserializeAsync<T>(string url, string parameters = null, CancellationToken? cancellationToken = null ) where T : class
         {
-            var response = await _request.GetResponseAsync(url, parameters);
+            var response = await _request.GetResponseAsync(url, parameters, cancellationToken.GetValueOrDefault());
 
             var stream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<T>(stream, _options);
+            return await JsonSerializer.DeserializeAsync<T>(stream, _options, cancellationToken.GetValueOrDefault());
         }
 
-        public async Task<T> DeserializeAsync<T>(Stream json)
+        public async Task<T> DeserializeAsync<T>(Stream json, CancellationToken? cancellationToken)
         {
-            if (json == null)
-                throw new NullReferenceException();
+            cancellationToken ??= CancellationToken.None;
 
-            return await JsonSerializer.DeserializeAsync<T>(json, _options);
+            if (json == null)
+                throw new NullReferenceException(nameof(json));
+
+            
+            return await JsonSerializer.DeserializeAsync<T>(json, _options, cancellationToken.Value);
         }
 
 

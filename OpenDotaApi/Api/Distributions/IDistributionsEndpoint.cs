@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Api.Distributions
@@ -5,6 +6,6 @@ namespace OpenDotaApi.Api.Distributions
     using Model;
     public interface IDistributionsEndpoint
     {
-        Task<Distributions> GetDistributionsAsync();
+        Task<Distributions> GetDistributionsAsync(CancellationToken? token = default);
     }
 }

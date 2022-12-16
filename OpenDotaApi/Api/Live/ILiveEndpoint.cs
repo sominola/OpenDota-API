@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Api.Live
@@ -7,6 +8,6 @@ namespace OpenDotaApi.Api.Live
 
     public interface ILiveEndpoint
     {
-        Task<List<Live>> GetProLiveGamesAsync();
+        Task<List<Live>> GetProLiveGamesAsync(CancellationToken? token = default);
     }
 }

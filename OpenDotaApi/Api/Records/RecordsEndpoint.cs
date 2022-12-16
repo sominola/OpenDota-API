@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 using OpenDotaApi.Enums;
@@ -15,10 +16,10 @@ namespace OpenDotaApi.Api.Records
             _formatter = formatter;
         }
 
-        public async Task<List<Record>> GetRecordsByFieldAsync(RecordField field)
+        public async Task<List<Record>> GetRecordsByFieldAsync(RecordField field, CancellationToken? token = default)
         {
             var result = Regex.Replace(field.ToString(), "([a-z])([A-Z])", "$1_$2").ToLower();
-            return await _formatter.DeserializeAsync<List<Record>>($"records/{result}");
+            return await _formatter.DeserializeAsync<List<Record>>($"records/{result}", null,token);
         }
     }
 }

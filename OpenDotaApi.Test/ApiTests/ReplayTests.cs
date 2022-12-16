@@ -18,7 +18,7 @@ namespace OpenDotaApi.Test.ApiTests
         {
             var listMatches = new List<long>
             {
-                6160273077
+                6911255198
             };
             var data = await _openDota.Replays.GetReplayDataAsync(listMatches);
             Assert.Equal(273, data.First().Cluster);

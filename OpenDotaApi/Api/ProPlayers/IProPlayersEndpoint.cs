@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Api.ProPlayers
@@ -7,6 +8,6 @@ namespace OpenDotaApi.Api.ProPlayers
 
     public interface IProPlayersEndpoint
     {
-        Task<List<ProPlayer>> GetListProPlayersAsync();
+        Task<List<ProPlayer>> GetListProPlayersAsync(CancellationToken? token = default);
     }
 }

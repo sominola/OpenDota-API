@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -14,7 +15,7 @@ namespace OpenDotaApi.Api.Matches
             _formatter = formatter;
         }
         
-        public async Task<Match> GetMatchAsync(long matchId) =>
-           await _formatter.DeserializeAsync<Match>($"matches/{matchId}");
+        public async Task<Match> GetMatchAsync(long matchId, CancellationToken? token = default) =>
+           await _formatter.DeserializeAsync<Match>($"matches/{matchId}", null, token);
     }
 }

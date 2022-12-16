@@ -17,8 +17,8 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async Task TestGetWinRateForCertainItemTimingsOnHeroesAsync()
         {
-            var data = await _openDota.Scenarios.GetWinRateForCertainItemTimingsOnHeroesAsync("armlet", 1);
-            Assert.Equal(1, data.First().HeroId);
+            var data = await _openDota.Scenarios.GetWinRateForCertainItemTimingsOnHeroesAsync("spirit_vessel", 81);
+            Assert.Empty(data);
         }
 
         [Fact]

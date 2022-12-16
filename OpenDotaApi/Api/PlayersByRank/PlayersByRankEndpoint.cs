@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -14,8 +15,8 @@ namespace OpenDotaApi.Api.PlayersByRank
             _formatter = formatter;
         }
         
-        public async Task<List<PlayersByRank>> GetListPlayersByRankAsync() =>
-            await _formatter.DeserializeAsync<List<PlayersByRank>>($"playersByRank");
+        public async Task<List<PlayersByRank>> GetListPlayersByRankAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<PlayersByRank>>($"playersByRank", null,token);
 
     }
 }

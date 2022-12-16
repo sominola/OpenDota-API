@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Enums;
 using OpenDotaApi.Utilities;
@@ -17,21 +18,24 @@ namespace OpenDotaApi.Api.Scenarios
             _formatter = formatter;
         }
 
-        public async Task<List<ItemTiming>> GetWinRateForCertainItemTimingsOnHeroesAsync(string item = null, int? heroId = null)
+        public async Task<List<ItemTiming>> GetWinRateForCertainItemTimingsOnHeroesAsync(string item = null, int? heroId = null,
+            CancellationToken? token = default)
         {
             var parameters = item == null ? "" : $"&item={item}";
             parameters += heroId == null ? "" : $"&hero_id={heroId}";
-            return await _formatter.DeserializeAsync<List<ItemTiming>>("scenarios/itemTimings", parameters);
+            return await _formatter.DeserializeAsync<List<ItemTiming>>("scenarios/itemTimings", parameters, token);
         }
 
-        public async Task<List<LaneRoles>> GetWinRateForHeroesAsync(HeroLaneRole? role = null, int? heroId = null)
+        public async Task<List<LaneRoles>> GetWinRateForHeroesAsync(HeroLaneRole? role = null, int? heroId = null,
+            CancellationToken? token = default)
         {
             var parameters = role == null ? "" : $"&lane_role={(int) role}";
             parameters += heroId == null ? "" : $"&hero_id={heroId}";
-            return await _formatter.DeserializeAsync<List<LaneRoles>>("scenarios/laneRoles", parameters);
+            return await _formatter.DeserializeAsync<List<LaneRoles>>("scenarios/laneRoles", parameters,token);
         }
 
-        public async Task<List<TeamScenarios>> GetTeamScenariosAsync(Enums.Scenarios? scenario = null)
+        public async Task<List<TeamScenarios>> GetTeamScenariosAsync(Enums.Scenarios? scenario = null,
+            CancellationToken? token = default)
         {
             var parameters = "";
             switch (scenario)
@@ -54,7 +58,8 @@ namespace OpenDotaApi.Api.Scenarios
                     throw new ArgumentOutOfRangeException(nameof(scenario), scenario, null);
             }
 
-            return await _formatter.DeserializeAsync<List<TeamScenarios>>("scenarios/misc",string.IsNullOrEmpty(parameters)? null:$"&scenario={parameters}");
+            return await _formatter.DeserializeAsync<List<TeamScenarios>>("scenarios/misc",
+                string.IsNullOrEmpty(parameters)? null:$"&scenario={parameters}", token);
         }
     }
 }

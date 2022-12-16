@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -15,7 +16,7 @@ namespace OpenDotaApi.Api.Schema
             _formatter = formatter;
         }
 
-        public async Task<List<Schema>> GetDataSchemaAsync() =>
-            await _formatter.DeserializeAsync<List<Schema>>("schema");
+        public async Task<List<Schema>> GetDataSchemaAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Schema>>("schema", null, token);
     }
 }

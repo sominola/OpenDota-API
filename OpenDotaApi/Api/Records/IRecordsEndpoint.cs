@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Enums;
 
@@ -8,6 +9,6 @@ namespace OpenDotaApi.Api.Records
 
     public interface IRecordsEndpoint
     {
-        Task<List<Record>> GetRecordsByFieldAsync(RecordField fields);
+        Task<List<Record>> GetRecordsByFieldAsync(RecordField fields,CancellationToken? token = default);
     }
 }

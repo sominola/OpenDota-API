@@ -1,20 +1,23 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace OpenDotaApi.Api.Heroes
+namespace OpenDotaApi.Api.Heroes;
+
+using Model;
+using Model.Duration;
+using Model.ItemPopularity;
+using Model.Matchup;
+using Model.Match;
+using Model.Player;
+
+public interface IHeroesEndpoint
 {
-    using Model;
-    using Model.Duration;
-    using Model.ItemPopularity;
-    using Model.Matchup;
-    public interface IHeroesEndpoint
-    {
-        Task<List<Hero>> GetDataAsync();
-        Task<List<Model.Match.Match>> GetRecentMatchesAsync(int heroId);
-        Task<List<Matchup>> GetMatchUpsAsync(int heroId);
-        Task<List<Duration>> GetDurationsAsync(int heroId);
-        Task<List<Model.Player.Player>> GetPlayersAsync(int heroId);
-        Task<ItemPopularity> GetItemPopularityAsync(int heroId);
-    }
+    Task<List<Hero>> GetDataAsync(CancellationToken? token = default);
+    Task<List<Match>> GetRecentMatchesAsync(int heroId, CancellationToken? token = default);
+    Task<List<Matchup>> GetMatchUpsAsync(int heroId, CancellationToken? token = default);
+    Task<List<Duration>> GetDurationsAsync(int heroId, CancellationToken? token = default);
+    Task<List<Player>> GetPlayersAsync(int heroId, CancellationToken? token = default);
+    Task<ItemPopularity> GetItemPopularityAsync(int heroId, CancellationToken? token = default);
 }

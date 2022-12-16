@@ -4,7 +4,7 @@ using Xunit;
 
 namespace OpenDotaApi.Test
 {
-    [Collection("JsonFormmaterTest")]
+    [Collection("JsonFormatterTest")]
     public class JsonFormatterTests : IDisposable
     {
         private readonly JsonFormatter _formatter;
@@ -13,7 +13,7 @@ namespace OpenDotaApi.Test
         [Fact]
         public async void TestThrowExceptionWhenNull()
         {
-            await Assert.ThrowsAsync<NullReferenceException>(async () =>
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                 {
                     await _formatter.DeserializeAsync<object>(null);
                 }

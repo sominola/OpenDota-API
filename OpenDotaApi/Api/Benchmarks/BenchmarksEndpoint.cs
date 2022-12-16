@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -12,8 +13,7 @@ namespace OpenDotaApi.Api.Benchmarks
         {
             _formatter = formatter;
         }
-
-        public async Task<Benchmarks> GetStatValuesByIdHeroAsync(int idHero) =>
-            await _formatter.DeserializeAsync<Benchmarks>($"benchmarks",$"hero_id={idHero}");
+        public async Task<Benchmarks> GetStatValuesByIdHeroAsync(int idHero, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<Benchmarks>($"benchmarks",$"hero_id={idHero}", token);
     }
 }

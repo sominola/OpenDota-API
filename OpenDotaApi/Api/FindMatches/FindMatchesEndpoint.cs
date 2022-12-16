@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -15,7 +16,7 @@ namespace OpenDotaApi.Api.FindMatches
             _formatter = formatter;
         }
 
-        public async Task<List<FindMatches>> FindsRecentMatchesByHeroesPlayedAsync(List<int> teamA = null, List<int> teamB = null)
+        public async Task<List<FindMatches>> FindsRecentMatchesByHeroesPlayedAsync(List<int> teamA = null, List<int> teamB = null, CancellationToken? token = default)
         {
             var parameters = "";
             if (teamA != null)
@@ -24,7 +25,7 @@ namespace OpenDotaApi.Api.FindMatches
             if (teamB != null)
                 foreach (var val in teamB)
                     parameters += $"&teamB={val}";
-            return await _formatter.DeserializeAsync<List<FindMatches>>("findMatches" , parameters);
+            return await _formatter.DeserializeAsync<List<FindMatches>>("findMatches" , parameters, token);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -26,54 +27,54 @@ namespace OpenDotaApi.Api.Players
             _request = request;
         }
 
-        public async Task<Player> GetPlayerAsync(long playerId) =>
-            await _formatter.DeserializeAsync<Player>($"players/{playerId}");
+        public async Task<Player> GetPlayerAsync(long playerId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<Player>($"players/{playerId}", null,token);
 
-        public async Task<WinLoss> GetWinLossAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<WinLoss>($"players/{playerId}/wl", parameters?.GetParameters());
+        public async Task<WinLoss> GetWinLossAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<WinLoss>($"players/{playerId}/wl", parameters?.GetParameters(),token);
 
-        public async Task<List<RecentMatches>> GetRecentMatchesAsync(long playerId) =>
-            await _formatter.DeserializeAsync<List<RecentMatches>>($"players/{playerId}/recentMatches");
+        public async Task<List<RecentMatches>> GetRecentMatchesAsync(long playerId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<RecentMatches>>($"players/{playerId}/recentMatches",null,token);
 
         public async Task<List<Model.Matches.Matches>> GetMatchesAsync(long playerId,
-            PlayerParameters parameters = null) =>
+            PlayerParameters parameters = null, CancellationToken? token = default) =>
             await _formatter.DeserializeAsync<List<Model.Matches.Matches>>($"players/{playerId}/matches",
-                parameters?.GetParameters());
+                parameters?.GetParameters(),token);
 
         public async Task<List<Model.Heroes.Heroes>>
-            GetHeroesAsync(long playerId, PlayerParameters parameters = null) =>
+            GetHeroesAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
             await _formatter.DeserializeAsync<List<Model.Heroes.Heroes>>($"players/{playerId}/heroes",
-                parameters?.GetParameters());
+                parameters?.GetParameters(),token);
 
-        public async Task<List<Peers>> GetPeersAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<List<Peers>>($"players/{playerId}/peers", parameters?.GetParameters());
+        public async Task<List<Peers>> GetPeersAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Peers>>($"players/{playerId}/peers", parameters?.GetParameters(),token);
 
-        public async Task<List<Pro>> GetProAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<List<Pro>>($"players/{playerId}/pros", parameters?.GetParameters());
+        public async Task<List<Pro>> GetProAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Pro>>($"players/{playerId}/pros", parameters?.GetParameters(),token);
 
-        public async Task<List<Totals>> GetTotalsAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<List<Totals>>($"players/{playerId}/totals", parameters?.GetParameters());
+        public async Task<List<Totals>> GetTotalsAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Totals>>($"players/{playerId}/totals", parameters?.GetParameters(), token);
 
         public async Task<List<Histograms>> GetHistogramsAsync(long playerId, string field,
-            PlayerParameters parameters = null) =>
+            PlayerParameters parameters = null, CancellationToken? token = default) =>
             await _formatter.DeserializeAsync<List<Histograms>>($"players/{playerId}/histograms/{field}",
-                parameters?.GetParameters());
+                parameters?.GetParameters(), token);
 
-        public async Task<WardMap> GetWardMapAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<WardMap>($"players/{playerId}/wardmap", parameters?.GetParameters());
+        public async Task<WardMap> GetWardMapAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<WardMap>($"players/{playerId}/wardmap", parameters?.GetParameters(),token);
 
-        public async Task<WordCloud> GetWordCloudAsync(long playerId, PlayerParameters parameters = null) =>
-            await _formatter.DeserializeAsync<WordCloud>($"players/{playerId}/wordcloud", parameters?.GetParameters());
+        public async Task<WordCloud> GetWordCloudAsync(long playerId, PlayerParameters parameters = null, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<WordCloud>($"players/{playerId}/wordcloud", parameters?.GetParameters(),token);
 
-        public async Task<List<Ratings>> GetRatingsAsync(long playerId) =>
-            await _formatter.DeserializeAsync<List<Ratings>>($"players/{playerId}/ratings");
+        public async Task<List<Ratings>> GetRatingsAsync(long playerId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Ratings>>($"players/{playerId}/ratings",null,token);
 
-        public async Task<List<Model.Rankings.Rankings>> GetRankingsAsync(long playerId) =>
-            await _formatter.DeserializeAsync<List<Model.Rankings.Rankings>>($"players/{playerId}/rankings");
+        public async Task<List<Model.Rankings.Rankings>> GetRankingsAsync(long playerId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Model.Rankings.Rankings>>($"players/{playerId}/rankings",null,token);
 
-        public async Task<bool> RefreshPlayerMatchHistoryAsync(long playerId)
+        public async Task<bool> RefreshPlayerMatchHistoryAsync(long playerId, CancellationToken? token = default)
         {
-            await _request.PostRequestAsync($"players/{playerId}/refresh");
+            await _request.PostRequestAsync($"players/{playerId}/refresh",token.GetValueOrDefault());
             return true;
         }
     }

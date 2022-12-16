@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -13,7 +14,7 @@ namespace OpenDotaApi.Api.Status
             _formatter = formatter;
         }
 
-        public async Task<Status> GetServiceStatisticsAsync() =>
-            await _formatter.DeserializeAsync<Status>("status");
+        public async Task<Status> GetServiceStatisticsAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<Status>("status", null, token);
     }
 }

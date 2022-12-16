@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -14,14 +15,14 @@ namespace OpenDotaApi.Api.Replays
             _formatter = formatter;
         }
 
-        public async Task<List<Replay>> GetReplayDataAsync(List<long> matchIds)
+        public async Task<List<Replay>> GetReplayDataAsync(List<long> matchIds, CancellationToken? token = default)
         {
             var parameters = "";
             if (matchIds != null)
                 foreach (var value in matchIds)
                     parameters += $"&match_id={value}";
 
-            return await _formatter.DeserializeAsync<List<Replay>>("replays", parameters);
+            return await _formatter.DeserializeAsync<List<Replay>>("replays", parameters, token);
         }
     }
 }

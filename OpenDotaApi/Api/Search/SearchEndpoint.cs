@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Api.Search.Model;
 using OpenDotaApi.Utilities;
@@ -14,7 +15,8 @@ namespace OpenDotaApi.Api.Search
             _formatter = formatter;
         }
 
-        public async Task<List<SearchPlayer>> GetListPlayersByNameAsync(string name) =>
-            await _formatter.DeserializeAsync<List<SearchPlayer>>($"search",$"q={name}");
+        public async Task<List<SearchPlayer>> GetListPlayersByNameAsync(string name,
+            CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<SearchPlayer>>($"search",$"q={name}", token);
     }
 }

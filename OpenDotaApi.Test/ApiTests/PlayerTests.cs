@@ -37,19 +37,19 @@ namespace OpenDotaApi.Test.ApiTests
         [Fact]
         public async Task TestGetMatchesAsync()
         {
-            var data = await _openDota.Players.GetMatchesAsync(164583656);
+            var data = await _openDota.Players.GetMatchesAsync(202612285);
             Assert.Null(data.First().Version);
             Assert.NotEmpty(data);
             var playerParameters = new PlayerParameters
             {
                 IncludedAccountId = new List<int>()
                 {
-                    196346369
+                    164217422
                 }
             };
 
-            var data1 = await _openDota.Players.GetMatchesAsync(164583656, playerParameters);
-            Assert.Equal(6149167716, data1.First().MatchId);
+            var data1 = await _openDota.Players.GetMatchesAsync(202612285, playerParameters);
+            Assert.NotNull(data1.FirstOrDefault());
         }
 
         [Fact]

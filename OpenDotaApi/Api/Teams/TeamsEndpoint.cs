@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -18,19 +19,19 @@ namespace OpenDotaApi.Api.Teams
             _formatter = formatter;
         }
 
-        public async Task<List<Team>> GetTeamsAsync() =>
-            await _formatter.DeserializeAsync<List<Team>>("teams");
+        public async Task<List<Team>> GetTeamsAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Team>>("teams", null, token);
 
-        public async Task<Team> GetTeamByIdAsync(long teamId) =>
-            await _formatter.DeserializeAsync<Team>($"teams/{teamId}");
+        public async Task<Team> GetTeamByIdAsync(long teamId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<Team>($"teams/{teamId}", null,token);
 
-        public async Task<List<Match>> GetMatchesAsync(long teamId) =>
-            await _formatter.DeserializeAsync<List<Match>>($"teams/{teamId}/matches");
+        public async Task<List<Match>> GetMatchesAsync(long teamId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Match>>($"teams/{teamId}/matches", null,token);
 
-        public async Task<List<Player>> GetPlayersAsync(long teamId) =>
-            await _formatter.DeserializeAsync<List<Player>>($"teams/{teamId}/players");
+        public async Task<List<Player>> GetPlayersAsync(long teamId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Player>>($"teams/{teamId}/players", null,token);
 
-        public async Task<List<Hero>> GetHeroesAsync(long teamId) =>
-            await _formatter.DeserializeAsync<List<Hero>>($"teams/{teamId}/heroes");
+        public async Task<List<Hero>> GetHeroesAsync(long teamId, CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<Hero>>($"teams/{teamId}/heroes", null, token);
     }
 }

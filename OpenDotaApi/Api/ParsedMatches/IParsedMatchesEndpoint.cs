@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Api.ParsedMatches
@@ -7,6 +8,6 @@ namespace OpenDotaApi.Api.ParsedMatches
 
     public interface IParsedMatchesEndpoint
     {
-        Task<List<ParsedMatch>> GetListParsedMatches(long? lessThanMatchId = null);
+        Task<List<ParsedMatch>> GetListParsedMatches(long? lessThanMatchId = null, CancellationToken? token = default);
     }
 }

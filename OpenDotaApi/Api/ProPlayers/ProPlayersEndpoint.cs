@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -15,7 +16,7 @@ namespace OpenDotaApi.Api.ProPlayers
             _formatter = formatter;
         }
         
-        public async Task<List<ProPlayer>> GetListProPlayersAsync() =>
-            await _formatter.DeserializeAsync<List<ProPlayer>>($"proPlayers");
+        public async Task<List<ProPlayer>> GetListProPlayersAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<List<ProPlayer>>($"proPlayers",null,token);
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using OpenDotaApi.Utilities;
 
@@ -14,7 +15,7 @@ namespace OpenDotaApi.Api.Distributions
             _formatter = formatter;
         }
 
-        public async Task<Distributions> GetDistributionsAsync() =>
-            await _formatter.DeserializeAsync<Distributions>("distributions");
+        public async Task<Distributions> GetDistributionsAsync(CancellationToken? token = default) =>
+            await _formatter.DeserializeAsync<Distributions>("distributions", null, token);
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OpenDotaApi.Utilities
@@ -39,7 +40,7 @@ namespace OpenDotaApi.Utilities
             };
         }
 
-        public async Task<HttpResponseMessage> GetResponseAsync(string url, string parameters = null)
+        public async Task<HttpResponseMessage> GetResponseAsync(string url, string parameters = null, CancellationToken cancellationToken = default)
         {
             var useApiKey = true;
             while (true)
@@ -54,7 +55,7 @@ namespace OpenDotaApi.Utilities
 
                 if (CurrentLimitMinute == null)
                 {
-                    response = await GetResponse(url);
+                    response = await GetResponse(url, cancellationToken);
 
                     if (response.IsSuccessStatusCode) return response;
                 }
@@ -64,9 +65,9 @@ namespace OpenDotaApi.Utilities
                     case <= 0:
                     {
                         var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
-                        await Task.Delay(difference);
+                        await Task.Delay(difference, cancellationToken);
 
-                        response = await GetResponse(url);
+                        response = await GetResponse(url, cancellationToken);
 
                         if (response.IsSuccessStatusCode) return response;
                         parameters = null;
@@ -75,7 +76,7 @@ namespace OpenDotaApi.Utilities
                     }
                     case > 0:
                     {
-                        response = await GetResponse(url);
+                        response = await GetResponse(url, cancellationToken);
                         if (response.IsSuccessStatusCode) return response;
                         parameters = null;
                         useApiKey = false;
@@ -87,14 +88,14 @@ namespace OpenDotaApi.Utilities
             }
         }
 
-        private async Task<HttpResponseMessage> GetResponse(string url)
+        private async Task<HttpResponseMessage> GetResponse(string url, CancellationToken cancellationToken = default)
         {
-            var response = await _client.GetAsync(url);
+            var response = await _client.GetAsync(url, cancellationToken);
             GetCurrentLimit(response.Headers);
             return response;
         }
 
-        public async Task<HttpResponseMessage> PostRequestAsync(string url)
+        public async Task<HttpResponseMessage> PostRequestAsync(string url, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -110,7 +111,7 @@ namespace OpenDotaApi.Utilities
 
             if (CurrentLimitMinute == null)
             {
-                response = await _client.PostAsync(url, null);
+                response = await _client.PostAsync(url, null, cancellationToken);
                 GetCurrentLimit(response.Headers);
 
                 if (response.IsSuccessStatusCode)
@@ -125,16 +126,16 @@ namespace OpenDotaApi.Utilities
                 {
                     var difference = TimeSpan.FromSeconds(61) - TimeSpan.FromSeconds(LastDateRequest.Second);
 
-                    await Task.Delay(difference);
+                    await Task.Delay(difference, cancellationToken);
 
-                    response = await _client.PostAsync(url, null);
+                    response = await _client.PostAsync(url, null, cancellationToken);
                     GetCurrentLimit(response.Headers);
                     response.EnsureSuccessStatusCode();
 
                     return response;
                 }
                 default:
-                    response = await _client.PostAsync(url, null);
+                    response = await _client.PostAsync(url, null, cancellationToken);
                     GetCurrentLimit(response.Headers);
                     response.EnsureSuccessStatusCode();
                     return response;
