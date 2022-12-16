@@ -1,4 +1,4 @@
-name: .NET Linux
+name: Publish package
 
 on:
   push:
