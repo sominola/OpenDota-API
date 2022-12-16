@@ -28,7 +28,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build OpenDotaApi.sln --configuration Release -f net6.0 --no-restore
+        run: dotnet build OpenDotaApi.sln --configuration Release --no-restore
 
       - name: Run unit tests
         run: dotnet test --configuration Release --collect:"XPlat Code Coverage" --settings ./OpenDotaApi.Test/test.settings.xml
