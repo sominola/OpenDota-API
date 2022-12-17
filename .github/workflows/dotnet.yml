@@ -35,11 +35,9 @@ jobs:
 
       - name: Copy coverage results
         run: cp ./OpenDotaApi.Test/TestResults/**/*.xml ./OpenDotaApi.Test/TestResults/
-
-      - name: Upload code coverage\
-        uses: codecov/codecov-action@v3
+       
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
         with:
-          token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          verbose: true
-          files: ./OpenDotaApi.Test/TestResults/coverage.opencover.xml
-          fail_ci_if_error: true
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ./OpenDotaApi.Test/TestResults/coverage.opencover.xml
