@@ -310,7 +310,7 @@ namespace OpenDotaApi.Api.Matches.Model
         public double KillsPerMin { get; set; }
 
         [JsonPropertyName("kda")]
-        public long? Kda { get; set; }
+        public double? Kda { get; set; }
 
         [JsonPropertyName("abandons")]
         public int? Abandons { get; set; }

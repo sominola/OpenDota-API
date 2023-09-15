@@ -8,18 +8,18 @@ namespace OpenDotaApi.Api.Constants
 {
     public class ConstantsEndpoint : IConstantsEndpoint
     {
-        private readonly RequestHandler _request;
+        private readonly JsonFormatter _formatter;
 
-        public ConstantsEndpoint(RequestHandler request)
+        public ConstantsEndpoint(JsonFormatter formatter)
         {
-            _request = request;
+            _formatter = formatter;
         }
 
-        public async Task<string> GetGameConstantsAsync(EnumConstants constant, CancellationToken? token = default)
+        public async Task<long[]> GetGameConstantsAsync(EnumConstants constant, CancellationToken? token = default)
         {
             var parameter = Regex.Replace(constant.ToString(), "([a-z])([A-Z])", "$1_$2").ToLower();
-            var response = await _request.GetResponseAsync($"constants/{parameter}", cancellationToken: token.GetValueOrDefault());
-            return await response.Content.ReadAsStringAsync();
+            return await _formatter.DeserializeAsync<long[]>($"constants/{parameter}",
+                cancellationToken: token.GetValueOrDefault());
         }
     }
 }

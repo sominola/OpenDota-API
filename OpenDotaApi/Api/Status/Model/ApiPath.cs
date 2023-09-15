@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Api.Status.Model
 {
@@ -7,6 +8,7 @@ namespace OpenDotaApi.Api.Status.Model
         [JsonPropertyName("hostname")]
         public string Hostname { get; set; }
 
+        [JsonConverter(typeof(Int32Converter))]
         [JsonPropertyName("count")]
         public int? Count { get; set; }
     }
