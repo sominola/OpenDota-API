@@ -7,6 +7,7 @@ namespace OpenDotaApi.Enums
     {
         Agi,
         Int,
-        Str
+        Str,
+        All,
     }
 }

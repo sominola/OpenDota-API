@@ -17,9 +17,7 @@ namespace OpenDotaApi.Utilities
             _request = request;
 
             _options = new JsonSerializerOptions();
-            _options.Converters.Add(new Int32Converter());
             _options.Converters.Add(new DateTimeConverter());
-            _options.Converters.Add(new Int64Converter());
         }
 
         public async Task<T> DeserializeAsync<T>(string url, string parameters = null, CancellationToken? cancellationToken = null ) where T : class

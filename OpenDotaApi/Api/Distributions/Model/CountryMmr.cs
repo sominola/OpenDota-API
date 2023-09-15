@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Api.Distributions.Model
 {
@@ -32,6 +33,7 @@ namespace OpenDotaApi.Api.Distributions.Model
         [JsonPropertyName("count")]
         public long? Count { get; set; }
 
+        [JsonConverter(typeof(Int32Converter))]
         [JsonPropertyName("avg")]
         public int? Avg { get; set; }
 

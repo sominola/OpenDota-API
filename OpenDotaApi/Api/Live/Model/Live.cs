@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Api.Live.Model
 {
@@ -39,6 +40,7 @@ namespace OpenDotaApi.Api.Live.Model
         [JsonPropertyName("average_mmr")]
         public int? AverageMmr { get; set; }
 
+        [JsonConverter(typeof(Int64Converter))]
         [JsonPropertyName("match_id")]
         public long? MatchId { get; set; }
 

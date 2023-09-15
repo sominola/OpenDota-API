@@ -63,7 +63,7 @@ namespace OpenDotaApi
             Live = new LiveEndpoint(_jsonFormatter);
             Scenarios = new ScenariosEndpoint(_jsonFormatter);
             Schema = new SchemaEndpoint(_jsonFormatter);
-            Constants = new ConstantsEndpoint(_request);
+            Constants = new ConstantsEndpoint(_jsonFormatter);
         }
         
         public string ApiKey

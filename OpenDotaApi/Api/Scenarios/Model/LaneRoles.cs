@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Api.Scenarios.Model
 {
@@ -13,9 +14,11 @@ namespace OpenDotaApi.Api.Scenarios.Model
         [JsonPropertyName("time")]
         public int? Time { get; set; }
 
+        [JsonConverter(typeof(Int64Converter))]
         [JsonPropertyName("games")]
         public long? Games { get; set; }
 
+        [JsonConverter(typeof(Int64Converter))]
         [JsonPropertyName("wins")]
         public long? Wins { get; set; }
     }

@@ -33,7 +33,7 @@ namespace OpenDotaApi.Api.ProPlayers.Model
         public DateTimeOffset? FullHistoryTime { get; set; }
 
         [JsonPropertyName("cheese")]
-        public int Cheese { get; set; }
+        public long? Cheese { get; set; }
 
         [JsonPropertyName("fh_unavailable")]
         public bool? FhUnavailable { get; set; }
@@ -42,7 +42,7 @@ namespace OpenDotaApi.Api.ProPlayers.Model
         public string Loccountrycode { get; set; }
 
         [JsonPropertyName("last_match_time")]
-        public DateTimeOffset LastMatchTime { get; set; }
+        public DateTimeOffset? LastMatchTime { get; set; }
 
         [JsonPropertyName("plus")]
         public bool? Plus { get; set; }

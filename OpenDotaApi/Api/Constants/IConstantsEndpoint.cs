@@ -6,6 +6,6 @@ namespace OpenDotaApi.Api.Constants
 {
     public interface IConstantsEndpoint
     {
-        Task<string> GetGameConstantsAsync(EnumConstants constant, CancellationToken? token = default);
+        Task<long[]> GetGameConstantsAsync(EnumConstants constant, CancellationToken? token = default);
     }
 }

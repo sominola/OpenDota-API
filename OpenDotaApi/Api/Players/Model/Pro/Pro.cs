@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using OpenDotaApi.Utilities.JsonConverters;
 
 namespace OpenDotaApi.Api.Players.Model.Pro
 {
@@ -35,6 +36,7 @@ namespace OpenDotaApi.Api.Players.Model.Pro
         [JsonPropertyName("locked_until")]
         public long? LockedUntil { get; set; }
 
+        [JsonConverter(typeof(Int64Converter))]
         [JsonPropertyName("steamid")]
         public long? Steamid { get; set; }
 
